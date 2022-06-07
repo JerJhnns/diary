@@ -42,8 +42,8 @@ namespace Oppikirja
             
 
 
-              Console.WriteLine(topi.Id + topi.Title + topi.Description + topi.EstimatedTimeToMaster
-               + topi.TimeSpent + topi.Source + topi.StartLearningDate + topi.CompletionDate);
+              Console.WriteLine(topi.Id+ " " + topi.Title + " " + topi.Description + " " + topi.EstimatedTimeToMaster + " "
+               + topi.TimeSpent + " " + topi.Source + " " + topi.StartLearningDate + " " + topi.CompletionDate);
                 
 
             
