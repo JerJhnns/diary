@@ -10,7 +10,9 @@ namespace Oppikirja
         {
             List<Topic> topic = new List<Topic>();
             Topic topi = new Topic();
-            topic.Add(topi);
+
+            
+                
             
             
             
@@ -33,9 +35,9 @@ namespace Oppikirja
                 topi.Source = Console.ReadLine();
 
                 Console.WriteLine("Anna aloitus aika: yyyy, mm, dd ");
-                topi.StartLearningDate = Convert.ToDateTime(Console.ReadLine());
+                topi.StartLearningDate = Convert.ToDateTime(Console.ReadLine()); 
 
-                Console.WriteLine("Onko opiskelu kesken? Y/N");
+            Console.WriteLine("Onko opiskelu kesken? Y/N");
                 var valinta = Console.ReadLine();
              
 
@@ -62,29 +64,16 @@ namespace Oppikirja
             else { }
 
             String path = @"C:\Users\Jere\source\repos\Oppikirja\Id.txt";
-            File.AppendAllText(path, Convert.ToString(topi.Id + topi.Title + topi.Description + topi.EstimatedTimeToMaster
-                + topi.TimeSpent + topi.Source + topi.StartLearningDate + topi.InProgress + topi.CompletionDate) + Environment.NewLine);
+            File.AppendAllText(path, Convert.ToString(topi.Id + "\n" + topi.Title + "\n" + topi.Description + "\n" + topi.EstimatedTimeToMaster + "\n"
+                + topi.TimeSpent + topi.Source + "\n" + topi.StartLearningDate + "\n" + topi.InProgress + "\n" + topi.CompletionDate) + Environment.NewLine);
             StreamReader sr = new StreamReader(@"C:\Users\Jere\source\repos\Shopping\Shoppinglist.txt");
 
 
-
+            
+                
         }
         }
     }
-    class Topic
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public double EstimatedTimeToMaster { get; set; }
-        public double TimeSpent { get; set; }
-        public string Source { get; set; }
-        public DateTime StartLearningDate { get; set; }
-        public bool InProgress { get;  set; }
-        public DateTime CompletionDate { get; set; }
-
-      
-       // kolmaspäivä radalla
-    }
+   
     
     
