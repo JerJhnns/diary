@@ -8,50 +8,51 @@ namespace Oppikirja
     public class  Method
 
     {
-        public static void Methodman() { 
-        Topic topi = new Topic();
-           
+       
+        public static void Methodman() {
+            Topic topi = new Topic();
 
 
-            Console.WriteLine("Anna aiheen tunniste");
-            
-
-                try
+            try
+            {
+                Console.WriteLine("Anna aiheen tunniste");
+                topi.Id = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (Exception e) { Console.WriteLine(e.Message);  }
+            try
                 {
-                    topi.Id = Convert.ToInt32(Console.ReadLine());
-                    //topic.Add();
-                    Console.WriteLine("Aiheen otsikko");
+                   Console.WriteLine("Aiheen otsikko");
                     topi.Title = Console.ReadLine();
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    
-                    
-                }
+            catch (Exception e) { Console.WriteLine(e.Message); }
 
-           
-            Console.WriteLine("Anna aiheen kuvaus");
-            topi.Description = Console.ReadLine();
-
-            Console.WriteLine("Anna aika arvio h.m");
-            topi.EstimatedTimeToMaster = Convert.ToDouble(Console.ReadLine());
-
+            try
+            {
+                Console.WriteLine("Anna aiheen kuvaus");
+                topi.Description = Console.ReadLine();
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
+            try
+            {
+                Console.WriteLine("Anna aika arvio h.m");
+                topi.EstimatedTimeToMaster = Convert.ToDouble(Console.ReadLine());
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
             Console.WriteLine("Kauanko olet opiskellut h.m");
             topi.TimeSpent = Convert.ToDouble(Console.ReadLine());
-
-            Console.WriteLine("Anna mahdollinen lähde: ");
-            topi.Source = Console.ReadLine();
+            try
+            {
+                Console.WriteLine("Anna mahdollinen lähde: ");
+                topi.Source = Console.ReadLine();
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
             try
             {
                 Console.WriteLine("Anna aloitus aika: dd/MM/yyyy ");
                 topi.StartLearningDate = Convert.ToDateTime(Console.ReadLine());
             }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-                Console.WriteLine("Onko opiskelu kesken? Y/N");
+            catch (Exception e) { Console.WriteLine(e.Message); }
+            Console.WriteLine("Onko opiskelu kesken? Y/N");
                 var valinta = Console.ReadLine();
           
 
@@ -63,41 +64,30 @@ namespace Oppikirja
                     Console.WriteLine("Milloin sait valmiiksi? dd/MM/yyyy");
                     topi.CompletionDate = Convert.ToDateTime(Console.ReadLine());
                 }
-                catch(Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                catch(Exception e){ Console.WriteLine(e.Message);}
 
-                    //Console.WriteLine(topi.Id + "\n" + topi.Title + "\n" + topi.Description + "\n" + topi.EstimatedTimeToMaster + "\n"
-                     //+ topi.TimeSpent + "\n" + topi.Source + "\n" + topi.StartLearningDate + "\n" + topi.CompletionDate + "\n" + topi.InProgress);
+                    
 
                 }
                 try
-                {
-                    if (valinta == "Y")
-                    {
-                        topi.InProgress = true;
-                        // Console.WriteLine(topi.Id + "\n" + topi.Title + "\n" + topi.Description + "\n" + topi.EstimatedTimeToMaster + "\n"
-                        // + topi.TimeSpent + "\n" + topi.Source + "\n" + topi.StartLearningDate + "\n" + topi.InProgress + "\n" + topi.CompletionDate);
-
-                    }
-                }
+                {if (valinta == "Y")
+                    {topi.InProgress = true;}}
                 catch(Exception e)
-                {
-                Console.WriteLine(e.Message);
-                
-                }
+                {Console.WriteLine(e.Message); }
                 
 
 
 
 
             String path = @"C:\Users\Jere\source\repos\Oppikirja\Id.txt";
-                string a = Convert.ToString(topi.Id + "," + topi.Title + "," + topi.Description + "," + topi.EstimatedTimeToMaster + "," +
-        +topi.TimeSpent + "," + topi.Source + "," + topi.StartLearningDate + "," + topi.InProgress + "," + topi.CompletionDate);
+                string a = Convert.ToString(topi.Id + ", " + topi.Title + ", " + topi.Description + ", " + topi.EstimatedTimeToMaster + ", " +
+        +topi.TimeSpent + ", " + topi.Source + ", " + topi.StartLearningDate + ", " + topi.InProgress + ", " + topi.CompletionDate);
 
             File.AppendAllText(path, a + Environment.NewLine);
-            StreamReader sr = new StreamReader(@"C:\Users\Jere\source\repos\Shopping\Shoppinglist.txt");
+
+
+
+            //StreamReader sr = new StreamReader(@"C:\Users\Jere\source\repos\Shopping\Shoppinglist.txt");
             //to be continue
 
 
@@ -113,6 +103,14 @@ namespace Oppikirja
                 Console.WriteLine(lokikirja[i]);
             }
         }
+
+
+
+
+
+
+
+
         public static void Ghostfacekillah()
         {
             Console.WriteLine("     __ ________");
@@ -128,6 +126,17 @@ namespace Oppikirja
             Console.WriteLine("         | ___\\");
             Console.WriteLine("         \\(___======][]");
             Console.WriteLine("           `--\"");
+        }
+        public static void Raekwon()
+        {
+            if (!File.Exists(@"C:\Users\Jere\source\repos\Oppikirja\Id.txt"))
+                File.Create(@"C:\Users\Jere\source\repos\Oppikirja\Id.txt");
+
+            TextWriter tw = new StreamWriter(@"C:\Users\Jere\source\repos\Oppikirja\Id.txt", false);
+            tw.Write(string.Empty);
+            tw.Close();
+
+            Console.WriteLine("Poistit kaiken");
         }
     }
 }
