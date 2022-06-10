@@ -9,75 +9,50 @@ namespace Oppikirja
     {
         public static void Main(string[] args)
         {
-            // List<Topic> topic = new List<Topic>();
-            Topic topi = new Topic();
-            
-
-
-            Console.WriteLine("Anna aiheen tunniste");
-            topi.Id = Convert.ToInt32(Console.ReadLine());
-            //topic.Add();
-            Console.WriteLine("Aiheen otsikko");
-            topi.Title = Console.ReadLine();
-
-            Console.WriteLine("Anna aiheen kuvaus");
-            topi.Description = Console.ReadLine();
-
-            Console.WriteLine("Anna aika arvio h.m");
-            topi.EstimatedTimeToMaster = Convert.ToDouble(Console.ReadLine());
-
-            Console.WriteLine("Kauanko olet opiskellut h.m");
-            topi.TimeSpent = Convert.ToDouble(Console.ReadLine());
-
-            Console.WriteLine("Anna mahdollinen lähde: ");
-            topi.Source = Console.ReadLine();
-           
-                Console.WriteLine("Anna aloitus aika: dd/MM/yyyy ");
-                topi.StartLearningDate = Convert.ToDateTime(Console.ReadLine());
-
-                Console.WriteLine("Onko opiskelu kesken? Y/N");
-                var valinta = Console.ReadLine();
-          
-
-                if (valinta == "N")
+            Console.WriteLine("Tervetuloa");
+            int valinta ;
+            do
+            {
+                Console.WriteLine("Vaihtoehtosi \nValitse 1: Jos haluat lisätä opinnon. \nValitse 2: Jos haluat tarkastaa tietoja \n" +
+                    "Valitse 3: Jos haluat tyhjentää tiedot \nValitse 4 Jos haluat nähdä Klingon Birf of Preyn\nValitse 5 jos haluat lopettaa.");
+                valinta = Convert.ToInt32(Console.ReadLine());
+                switch (valinta)
                 {
-                    topi.InProgress = false;
-                    Console.WriteLine("Milloin sait valmiiksi? dd/MM/yyyy");
-                    topi.CompletionDate = Convert.ToDateTime(Console.ReadLine());
-
-
-                    Console.WriteLine(topi.Id + "\n" + topi.Title + "\n" + topi.Description + "\n" + topi.EstimatedTimeToMaster + "\n"
-                     + topi.TimeSpent + "\n" + topi.Source + "\n" + topi.StartLearningDate + "\n" + topi.CompletionDate + "\n" + topi.InProgress);
-
+                    case 1:
+                        Console.Clear();
+                        Method.Methodman();
+                        
+                        break;
+                    case 2:
+                        Console.Clear();
+                        Method.Redman();
+                        
+                        break;
+                    case 3:
+                        Console.Clear();
+                        
+                        break;
+                    case 4:
+                        Console.Clear();
+                        Method.Ghostfacekillah();
+                        break;
+                    case 5:
+                        Console.Clear();
+                        Console.WriteLine("Tervemenoa!");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice mate");
+                        
+                        break;
                 }
-
-                if (valinta == "Y")
-                {
-                    topi.InProgress = true;
-                    Console.WriteLine(topi.Id + "\n" + topi.Title + "\n" + topi.Description + "\n" + topi.EstimatedTimeToMaster + "\n"
-                     + topi.TimeSpent + "\n" + topi.Source + "\n" + topi.StartLearningDate + "\n" + topi.InProgress + "\n" + topi.CompletionDate);
-
-                }
-
-                else { }
+                
+            }
             
-            //Topic.Method();
-            
-
-            String path = @"C:\Users\Jere\source\repos\Oppikirja\Id.txt";
-            string a =  Convert.ToString(topi.Id+"," + topi.Title + "," + topi.Description + "," + topi.EstimatedTimeToMaster + "," +
-                    +topi.TimeSpent + "," + topi.Source + "," + topi.StartLearningDate + "," + topi.InProgress + "," + topi.CompletionDate);
-            
-            File.AppendAllText(path, a + Environment.NewLine);
-            StreamReader sr = new StreamReader(@"C:\Users\Jere\source\repos\Shopping\Shoppinglist.txt");
-            //to be continue
-
-
-
+            while (valinta != 5) ;
+        }  
         }
     }
-   
-}
+
 
 
 
