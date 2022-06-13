@@ -5,25 +5,35 @@ using System.Text;
 
 namespace Oppikirja
 {
+    
     public class  Method
 
     {
-       
-        public static void Methodman() {
+
+        public static void Methodman(Dictionary<int, Topic> uusTopi) {
+
             Topic topi = new Topic();
+
+            uusTopi.Add(topi.Id, topi);
+            
 
 
             try
             {
                 Console.WriteLine("Anna aiheen tunniste");
                 topi.Id = Convert.ToInt32(Console.ReadLine());
+                
+                  
+
             }
             catch (Exception e) { Console.WriteLine(e.Message);  }
+
             try
                 {
                    Console.WriteLine("Aiheen otsikko");
                     topi.Title = Console.ReadLine();
-                }
+                
+            }
             catch (Exception e) { Console.WriteLine(e.Message); }
 
             try
@@ -74,34 +84,38 @@ namespace Oppikirja
                     {topi.InProgress = true;}}
                 catch(Exception e)
                 {Console.WriteLine(e.Message); }
-                
 
-
+            uusTopi.Add(topi.Id, topi);
 
 
             String path = @"C:\Users\Jere\source\repos\Oppikirja\Id.txt";
                 string a = Convert.ToString(topi.Id + ", " + topi.Title + ", " + topi.Description + ", " + topi.EstimatedTimeToMaster + ", " +
-        +topi.TimeSpent + ", " + topi.Source + ", " + topi.StartLearningDate + ", " + topi.InProgress + ", " + topi.CompletionDate);
+                +topi.TimeSpent + ", " + topi.Source + ", " + topi.StartLearningDate + ", " + topi.InProgress + ", " + topi.CompletionDate);
 
             File.AppendAllText(path, a + Environment.NewLine);
 
-
-
-            //StreamReader sr = new StreamReader(@"C:\Users\Jere\source\repos\Shopping\Shoppinglist.txt");
-            //to be continue
-
-
-
         }
-        public static void Redman()
+        public static void Redman(Dictionary<int,Topic> uusTopi)
         {
 
-            var loki = File.ReadAllLines(@"C:\Users\Jere\source\repos\Oppikirja\Id.txt");
-            var lokikirja = new List<String>(loki);
+            
+
+            if (uusTopi.ContainsKey(1)){
+                Console.WriteLine("löytyy");
+
+            }
+            else
+            {
+                Console.WriteLine("ei löydy");
+            }
+            /*var loki = File.ReadAllLines(@"C:\Users\Jere\source\repos\Oppikirja\Id.txt");
+            
+            var  lokikirja = new List<String>(loki);
             for (int i = 0; i < lokikirja.Count; i++)
             {
+                
                 Console.WriteLine(lokikirja[i]);
-            }
+            }*/
         }
 
 

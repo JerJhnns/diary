@@ -1,0 +1,4 @@
+1, Jere, Kaikki, 2, 3, www.com, 15/10/1994 0.00.00, True, 01/01/0001 0.00.00
+2, kalle, uusikalle, 2, 2, www.kuu, 12/02/2000 0.00.00, False, 13/03/2000 0.00.00
+1, Jere, johannes, 2, 2, www, 01/02/2000 0.00.00, True, 01/01/0001 0.00.00
+5, Jarmo, Ostarin rookki tähti, 4, 5, www.ocom, 02/03/0222 0.00.00, True, 01/01/0001 0.00.00

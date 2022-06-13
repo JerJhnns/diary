@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,17 +10,39 @@ namespace Oppikirja
     {
         public static void Main(string[] args)
         {
+            /*var path = @"C:\Users\Jere\source\repos\Oppikirja\Id.txt"; // Habeeb, "Dubai Media City, Dubai"
+            using (TextFieldParser csvParser = new TextFieldParser(path))
+            {
+                csvParser.CommentTokens = new string[] { "#" };
+                csvParser.SetDelimiters(new string[] { "," });
+                csvParser.HasFieldsEnclosedInQuotes = true;
+
+                // Skip the row with the column names
+                csvParser.ReadLine();
+
+                while (!csvParser.EndOfData)
+                {
+                    // Read current line fields, pointer moves to the next line.
+                    string[] fields = csvParser.ReadFields();
+                     = fields[0];
+                    string Address = fields[1];
+                }
+            }
+            */
             Console.WriteLine("---------------------------");
             Console.WriteLine("\tTERVETULOA");
             Console.WriteLine("---------------------------");
             int valinta ;
+            Dictionary<int, Topic> uusTopi = new Dictionary<int, Topic>();
+           
+
             do
             {
                 Console.WriteLine(
                     "Vaihtoehtosi \nValitse 1: Jos haluat lisätä opinnon. " +
-                    "\nValitse 2: Jos haluat tarkastaa tietoja \n" +
+                    "\nValitse 2: Jos haluat tarkastaa tietoja Id:llä tai Titlellä \n" +
                     "Valitse 3: Jos haluat tyhjentää tiedot " +
-                    "\nValitse 4 Jos haluat nähdä Klingon Birf of Preyn" +
+                    "\nValitse 4 Jos haluat " +
                     "\nValitse 5 jos haluat lopettaa.");
 
                 valinta = Convert.ToInt32(Console.ReadLine());
@@ -28,11 +51,12 @@ namespace Oppikirja
                 {
                     case 1:
                         Console.Clear();
-                        Method.Methodman();
+                        Method.Methodman(uusTopi);
+                        
                         break;
                     case 2:
                         Console.Clear();
-                        Method.Redman();
+                        Method.Redman(uusTopi);
                         break;
                     case 3:
                         Console.Clear();

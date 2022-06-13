@@ -7,25 +7,113 @@ namespace Oppikirja
 {
     public class Topic
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public double EstimatedTimeToMaster { get; set; }
-        public double TimeSpent { get; set; }
-        public string Source { get; set; }
-        public DateTime StartLearningDate { get; set; }
-        public bool InProgress { get; set; }
-        public DateTime CompletionDate { get; set; }
-
-        /*public static void Method()
+        
+        public int Id;
+        public string Title;
+        public string Description;
+        public double EstimatedTimeToMaster;
+        public double TimeSpent;
+        public string Source;
+        public DateTime StartLearningDate;
+        public bool InProgress;
+        public DateTime CompletionDate;
+        public Topic()
         {
-          
-            String path = @"C:\Users\Jere\source\repos\Oppikirja\Id.txt";
-            string a = Convert.ToString(Id + "," + Title + "," + Description + "," + topi.EstimatedTimeToMaster + "," +
-                    +topi.TimeSpent + "," + topi.Source + "," + topi.StartLearningDate + "," + topi.InProgress + "," + topi.CompletionDate);
+            
 
-            File.AppendAllText(path, a + Environment.NewLine);
-            StreamReader sr = new StreamReader(@"C:\Users\Jere\source\repos\Shopping\Shoppinglist.txt");*/
+
         }
+       /* public Topic(int id)
+        {
+            this.Id = id;
+            
+
+        }
+        public Topic(int id, string title)
+        {
+            this.Id = id;
+            
+            
+
+        }
+        public Topic(int id, string title, string des)
+        {
+            this.Id = id;
+            this.Title = title;
+            this.Description = des;
+            
+
+        }
+        public Topic(int id, string title, string des, double etm)
+        {
+            this.Id = id;
+            this.Title = title;
+            this.Description = des;
+            this.EstimatedTimeToMaster = etm;
+           
+
+        }
+        public Topic(int id, string title, string des, double etm, double ts)
+        {
+            this.Id = id;
+            this.Title = title;
+            this.Description = des;
+            this.EstimatedTimeToMaster = etm;
+            this.TimeSpent = ts;
+           
+
+        }
+        public Topic(int id, string title, string des, double etm, double ts, string sou)
+        {
+            this.Id = id;
+            this.Title = title;
+            this.Description = des;
+            this.EstimatedTimeToMaster = etm;
+            this.TimeSpent = ts;
+            this.Source = sou;
+            
+
+        }
+        public Topic(int id, string title, string des, double etm, double ts, string sou,DateTime std)
+        {
+            this.Id = id;
+            this.Title = title;
+            this.Description = des;
+            this.EstimatedTimeToMaster = etm;
+            this.TimeSpent = ts;
+            this.Source = sou;
+            this.StartLearningDate = std;
+            
+
+        }
+        public Topic(int id, string title, string des, double etm, double ts, string sou, DateTime std, bool ip)
+        {
+            this.Id = id;
+            this.Title = title;
+            this.Description = des;
+            this.EstimatedTimeToMaster = etm;
+            this.TimeSpent = ts;
+            this.Source = sou;
+            this.StartLearningDate = std;
+            this.InProgress = ip;
+           
+
+        }
+        public Topic(int id, string title, string des, double etm, double ts, string sou, DateTime std, bool ip, DateTime cd)
+        {
+            this.Id = id;
+            this.Title = title;
+            this.Description = des;
+            this.EstimatedTimeToMaster = etm;
+            this.TimeSpent = ts;
+            this.Source = sou;
+            this.StartLearningDate = std;
+            this.InProgress = ip;
+            this.CompletionDate = cd;
+
+        }
+        */
+       
     }
+}
 
