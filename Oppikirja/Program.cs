@@ -10,31 +10,23 @@ namespace Oppikirja
     {
         public static void Main(string[] args)
         {
-            /*var path = @"C:\Users\Jere\source\repos\Oppikirja\Id.txt"; // Habeeb, "Dubai Media City, Dubai"
-            using (TextFieldParser csvParser = new TextFieldParser(path))
-            {
-                csvParser.CommentTokens = new string[] { "#" };
-                csvParser.SetDelimiters(new string[] { "," });
-                csvParser.HasFieldsEnclosedInQuotes = true;
+            string path = @"C:\Users\Jere\source\repos\Oppikirja\Id.txt";
+            Topic topi = new Topic();
+            
+            int valinta ;
+            
+            Dictionary<int, Topic> uusTopi = new Dictionary<int, Topic>();
+            
 
-                // Skip the row with the column names
-                csvParser.ReadLine();
 
-                while (!csvParser.EndOfData)
-                {
-                    // Read current line fields, pointer moves to the next line.
-                    string[] fields = csvParser.ReadFields();
-                     = fields[0];
-                    string Address = fields[1];
-                }
-            }
-            */
+            Method.OldDirtyBastard(path,  topi, uusTopi);
+
+
+
+
             Console.WriteLine("---------------------------");
             Console.WriteLine("\tTERVETULOA");
             Console.WriteLine("---------------------------");
-            int valinta ;
-            Dictionary<int, Topic> uusTopi = new Dictionary<int, Topic>();
-           
 
             do
             {
@@ -51,12 +43,12 @@ namespace Oppikirja
                 {
                     case 1:
                         Console.Clear();
-                        Method.Methodman(uusTopi);
+                        Method.Methodman(path,uusTopi,topi );
                         
                         break;
                     case 2:
                         Console.Clear();
-                        Method.Redman(uusTopi);
+                        Method.Redman(uusTopi, topi, path);
                         break;
                     case 3:
                         Console.Clear();
