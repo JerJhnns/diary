@@ -21,8 +21,12 @@ namespace Oppikirja
             Topic topi = new Topic();
             Method.OldDirtyBastard(path, topi, uusTopi, listuri);
             int valinta ;
-           
-           
+            foreach (var i in listuri)
+            {
+                Console.WriteLine(i.Id);
+                Console.WriteLine(i.Title);
+            }
+
 
             Console.WriteLine("---------------------------");
             Console.WriteLine("\tTERVETULOA");
@@ -36,7 +40,11 @@ namespace Oppikirja
                     "Valitse 3: Jos haluat muokata Idllä" +
                     "\nValitse 4 Jos haluat tyhjentää tiedot  " +
                     "\nValitse 5 jos haluat lopettaa.");
-
+                foreach (var i in listuri)
+                {
+                    Console.WriteLine(i.Id);
+                    Console.WriteLine(i.Title);
+                }
                 valinta = Convert.ToInt32(Console.ReadLine());
                 
 
@@ -60,7 +68,7 @@ namespace Oppikirja
                         Method.Raekwon();
                         break;
 
-                        break;
+                        
                     case 5:
                         Console.Clear();
                         Console.WriteLine("---------------------------");

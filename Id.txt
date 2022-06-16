@@ -2,3 +2,5 @@
 2,Jere,Kalle,5,5,www.google.com,12/02/2002 0.00.00,True,15/06/2022 0.00.00
 3,Kalle,Toivio,3,4,www.com,21/02/2009 0.00.00,True,15/06/2022 0.00.00
 4,Jaska,kalle,2,3,www.com,01/01/2001 0.00.00,True,15/06/2022 0.00.00
+5,Katriina,Kallenkeskimies,4,5,www.com.com,12/06/0299 0.00.00,True,16/06/2022 0.00.00
+6,Aki,Viemäri,2,3,www.com.fi,12/02/2002 0.00.00,True,16/06/2022 0.00.00
