@@ -22,19 +22,7 @@ namespace Oppikirja
             Method.OldDirtyBastard(path, topi, uusTopi, listuri);
             int valinta ;
            
-            /*var writer = new StreamWriter(path2);
-            var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
-
-                var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8}", topi.Id, topi.Title, topi.Description, topi.EstimatedTimeToMaster,
-             +topi.TimeSpent, topi.Source, topi.StartLearningDate, topi.InProgress, topi.CompletionDate);
-
-            csv.WriteRecords(newLine);*/
-            
-
-            
-
-
-
+           
 
             Console.WriteLine("---------------------------");
             Console.WriteLine("\tTERVETULOA");
@@ -44,9 +32,9 @@ namespace Oppikirja
             {
                 Console.WriteLine(
                     "Vaihtoehtosi \nValitse 1: Jos haluat lisätä opinnon. " +
-                    "\nValitse 2: Jos haluat tarkastaa tietoja Id:llä tai Titlellä ja muokata niitä \n" +
-                    "Valitse 3: Jos haluat tyhjentää tiedot " +
-                    "\nValitse 4 Jos haluat " +
+                    "\nValitse 2: Jos haluat muokata Titlellä \n" +
+                    "Valitse 3: Jos haluat muokata Idllä" +
+                    "\nValitse 4 Jos haluat tyhjentää tiedot  " +
                     "\nValitse 5 jos haluat lopettaa.");
 
                 valinta = Convert.ToInt32(Console.ReadLine());
@@ -65,20 +53,12 @@ namespace Oppikirja
                         break;
                     case 3:
                         Console.Clear();
-                        Method.Raekwon();
+                        Method.Ghostfacekillah(topi, listuri);
                         break;
                     case 4:
                         Console.Clear();
-                        
-                       foreach( var item in listuri)
-                        {
-                            Console.WriteLine(item.Id);
-                            Console.WriteLine(item.Title);
-                            Console.WriteLine(item.Description);
-                            
-                            
-
-                        }
+                        Method.Raekwon();
+                        break;
 
                         break;
                     case 5:
