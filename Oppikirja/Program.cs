@@ -21,31 +21,26 @@ namespace Oppikirja
             Topic topi = new Topic();
             Method.OldDirtyBastard(path, topi, uusTopi, listuri);
             int valinta ;
-            foreach (var i in listuri)
-            {
-                Console.WriteLine(i.Id);
-                Console.WriteLine(i.Title);
-            }
 
-
+            Console.ForegroundColor
+            = ConsoleColor.Blue;
             Console.WriteLine("---------------------------");
             Console.WriteLine("\tTERVETULOA");
             Console.WriteLine("---------------------------");
-
+            Console.ForegroundColor
+            = ConsoleColor.White;
             do
             {
                 Console.WriteLine(
                     "Vaihtoehtosi \nValitse 1: Jos haluat lisätä opinnon. " +
-                    "\nValitse 2: Jos haluat muokata Titlellä \n" +
-                    "Valitse 3: Jos haluat muokata Idllä" +
-                    "\nValitse 4 Jos haluat tyhjentää tiedot  " +
-                    "\nValitse 5 jos haluat lopettaa.");
-                foreach (var i in listuri)
-                {
-                    Console.WriteLine(i.Id);
-                    Console.WriteLine(i.Title);
-                }
+                    "\nValitse 2: Jos haluat tarkastaa, muokata tai poistaa Titlellä \n" +
+                    "Valitse 3: Jos haluat tarkastaa, muokata tai poistaa Id:llä" +
+                    "\nValitse 4: Jos haluat tyhjentää tiedot txt kansiosta " +
+                    "\nValitse 5: Checkata aiheesi" +
+                    "\nValitse 6: jos haluat lopettaa.");
+                
                 valinta = Convert.ToInt32(Console.ReadLine());
+                
                 
 
                 switch (valinta)
@@ -53,40 +48,51 @@ namespace Oppikirja
                     case 1:
                         Console.Clear();
                         Method.Methodman(path,uusTopi,topi, listuri, path2 );
-                        
+                        Console.Clear();
                         break;
                     case 2:
                         Console.Clear();
                         Method.Redman(uusTopi, topi, path, listuri);
+                        Console.Clear();
                         break;
                     case 3:
                         Console.Clear();
                         Method.Ghostfacekillah(topi, listuri);
+                        Console.Clear();
                         break;
                     case 4:
                         Console.Clear();
                         Method.Raekwon();
+                        Console.Clear();
                         break;
 
                         
                     case 5:
                         Console.Clear();
+                        Method.Rza(listuri);
+                        Console.Clear();
+                        break;
+                    case 6:
+                        Console.Clear();
+                        
                         Console.WriteLine("---------------------------");
                         Console.WriteLine("\tTervemenoa!");
                         Console.WriteLine("---------------------------");
+                        Console.WriteLine("\n\n\n\n\nSovellus on myynnissä lähtöhinta: 1 euro enemmän kuin Wolt");
                         break;
                     default:
                         Console.Clear();
                         Console.WriteLine("---------------------------");
                         Console.WriteLine( "\nInvalid choice mate\n");
                         Console.WriteLine("---------------------------");
+                        
                         break;
                 }
                
                 
             }
             
-            while (valinta != 5) ;
+            while (valinta != 6) ;
         }  
         }
     }

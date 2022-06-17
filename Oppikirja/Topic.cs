@@ -26,10 +26,14 @@ namespace Oppikirja
         public bool InProgress { get; set; }
      
         public DateTime CompletionDate { get; set; }
-        
 
 
 
+        public string Tulostus()
+        {
+            return $"ID: {Id}\nAihe: {Title}\nKuvaus{Description}\nSinulla on : {EstimatedTimeToMaster - TimeSpent}h jäljellä\n" +
+                $"Lähde: {Source}\nOlet opiskellut {(CompletionDate - StartLearningDate).TotalDays} päivää";
+        }
     }
 }
     

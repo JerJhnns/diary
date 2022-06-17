@@ -26,9 +26,11 @@ namespace Oppikirja
 
             try
             {
+                
                 Console.WriteLine("Anna aiheen tunniste");
                 topi.Id = Convert.ToInt32(Console.ReadLine());
-                
+                topi.Id = listuri.Count + 1;
+              
 
 
             }
@@ -118,10 +120,7 @@ namespace Oppikirja
         public static void Gza(Topic topi, List<Topic> listuri, int num, string nim)
         {
             Console.Clear();
-            
-
-            //bool  x =listuri.Select(a => a.Title == nim).Any();
-            //bool y = listuri.Select(a => a.Id == num).Any();
+     
             foreach ( var i in listuri.ToList())
             {
                 if (i.Id == num) {
@@ -133,23 +132,7 @@ namespace Oppikirja
                 }
             }
 
-            /*if(x == true)
-            {
-                listuri.Select(i =>
-                {
-                    if (i.Title == nim) listuri.(i);
-                    return i;
-                });
-            }
-            if (y == true)
-            {
-                listuri.Select(i =>
-                {
-                    if (i.Id == num) listuri.Remove(i);
-                    return i;
-                });
-            }*/
-            //else { }
+          
         }
 
         public static void Redman(Dictionary<int, Topic> uusTopi, Topic topi, string path, List<Topic> listuri)
@@ -158,11 +141,8 @@ namespace Oppikirja
 
             int num = 2;
             string nim = Console.ReadLine();
-
-            bool x = listuri.Select(a => a.Title == nim).Any();
-            
-
-            if (x == true)
+            Console.Clear();
+            if (listuri.Select(a => a.Title == nim).Any())
             {
 
                 Console.WriteLine("Mitä haluat muokata");
@@ -173,18 +153,19 @@ namespace Oppikirja
                     "5. Tuhlattu aikan\n" +
                     "6. Lähde\n" +
                     "7. Aloitus aika\n" +
-                    "8. Vaiheessa\n" +
-                    "9. Valmistumispäivä");
+                    "8. Valmistumispäivä\n" +
+                    "9. Tarkasta tiedot");
                 int valinta = Convert.ToInt32(Console.ReadLine());
-
+                Console.Clear();
                 switch (valinta)
                 {
                     case 1:
+                        Console.Clear();
                         Console.WriteLine("Poista osio");
                         Gza(topi, listuri,num, nim);
                         break;
                     case 2:
-
+                        Console.Clear();
                         Console.WriteLine("Anna uusi Title");
                         string uusiTitle = Console.ReadLine();
 
@@ -193,9 +174,12 @@ namespace Oppikirja
                              if (i.Title == nim) i.Title = uusiTitle;
                              return i;
                          }).ToList();
+                        Console.ReadLine();
+                        Console.Clear();
 
                         break;
                     case 3:
+                        Console.Clear();
                         Console.WriteLine("Anna uusi Description");
                         string uusiDes = Console.ReadLine();
                         listuri.Select(i =>
@@ -203,8 +187,11 @@ namespace Oppikirja
                             if (i.Title == nim) i.Description = uusiDes;
                             return i;
                         }).ToList();
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case 4:
+                        Console.Clear();
                         Console.WriteLine("Anna uusi aika arvio");
                         double aika = Convert.ToDouble(Console.ReadLine());
                         listuri.Select(i =>
@@ -212,8 +199,11 @@ namespace Oppikirja
                             if (i.Title == nim) i.EstimatedTimeToMaster = aika;
                             return i;
                         }).ToList();
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case 5:
+                        Console.Clear();
                         Console.WriteLine("Anna uusi tuhlatun aja arvio");
                         double tuhaika = Convert.ToDouble(Console.ReadLine());
                         listuri.Select(i =>
@@ -221,8 +211,11 @@ namespace Oppikirja
                             if (i.Title == nim) i.TimeSpent = tuhaika;
                             return i;
                         }).ToList();
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case 6:
+                        Console.Clear();
                         Console.WriteLine("Anna uusi lähde");
                         string lähde = Console.ReadLine();
                         listuri.Select(i =>
@@ -230,8 +223,11 @@ namespace Oppikirja
                             if (i.Title == nim) i.Source = lähde;
                             return i;
                         }).ToList();
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case 7:
+                        Console.Clear();
                         Console.WriteLine("Anna uusi aloituspäivä");
                         DateTime alote = Convert.ToDateTime(Console.ReadLine());
                         listuri.Select(i =>
@@ -239,38 +235,32 @@ namespace Oppikirja
                             if (i.Title == nim) i.StartLearningDate = alote;
                             return i;
                         }).ToList();
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case 8:
-                        Console.WriteLine("Oletko saanut homman valmiiksi? Y/N");
-                        string kesken = Console.ReadLine();
-                        if (kesken == "Y")
-                        {
-
-                            listuri.Select(i =>
-                            {
-                                if (i.Title == nim) i.InProgress = true;
-                                return i;
-                            }).ToList();
-                        }
-                        if (kesken == "N")
-                        {
-
-                            listuri.Select(i =>
-                            {
-                                if (i.Title == nim) i.InProgress = false;
-                                return i;
-                            }).ToList();
-                        }
-                        break;
-                    case 9:
-                        Console.WriteLine("Anna uusi ID");
+                        Console.Clear();
+                        Console.WriteLine("Anna uusi Valmistumipäivä");
                         DateTime lopete = Convert.ToDateTime(Console.ReadLine());
                         listuri.Select(i =>
                         {
                             if (i.Title == nim) i.CompletionDate = lopete;
                             return i;
                         }).ToList();
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
+                    case 9:
+                        Console.Clear();
+                        var lista = listuri.Where(x => (x.Title == nim));
+                        foreach (var o in lista)
+                        {
+                            Console.WriteLine(o.Tulostus());
+                        }
+                        Console.ReadLine();
+                        Console.Clear();
+                        break;
+                        
 
                 }
                
@@ -279,10 +269,12 @@ namespace Oppikirja
         public static void Ghostfacekillah(Topic topi, List<Topic> listuri)
         {
             Console.WriteLine("Anna ID?");
+            
             int num = Convert.ToInt32(Console.ReadLine());
-            string nim = "aaa";
-            bool x = listuri.Select(a => a.Id == num).Any();
-            if (x == true)
+            string nim = "";
+
+            Console.Clear();
+            if (listuri.Select(a => a.Id == num).Any())
             {
 
                 Console.WriteLine("Mitä haluat muokata");
@@ -293,18 +285,19 @@ namespace Oppikirja
                     "5. Tuhlattu aikan\n" +
                     "6. Lähde\n" +
                     "7. Aloitus aika\n" +
-                    "8. Vaiheessa\n" +
-                    "9. Valmistumispäivä");
+                    "8. Valmitumispäivä\n" +
+                    "9. Tarkasta tiedot");
                 int valinta = Convert.ToInt32(Console.ReadLine());
-
+                Console.Clear();
                 switch (valinta)
                 {
                     case 1:
+                        Console.Clear();
                         Console.WriteLine("Poista osio");
                         Gza(topi, listuri, num, nim);
                         break;
                     case 2:
-
+                        Console.Clear();
                         Console.WriteLine("Anna uusi Title");
                         string uusiTitle = Console.ReadLine();
 
@@ -313,9 +306,13 @@ namespace Oppikirja
                             if (i.Id == num) i.Title = uusiTitle;
                             return i;
                         }).ToList();
+                        Console.ReadLine();
+                        Console.Clear();
+
 
                         break;
                     case 3:
+                        Console.Clear();
                         Console.WriteLine("Anna uusi Description");
                         string uusiDes = Console.ReadLine();
                         listuri.Select(i =>
@@ -323,8 +320,11 @@ namespace Oppikirja
                             if (i.Id == num) i.Description = uusiDes;
                             return i;
                         }).ToList();
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case 4:
+                        Console.Clear();
                         Console.WriteLine("Anna uusi aika arvio");
                         double aika = Convert.ToDouble(Console.ReadLine());
                         listuri.Select(i =>
@@ -332,8 +332,11 @@ namespace Oppikirja
                             if (i.Id == num) i.EstimatedTimeToMaster = aika;
                             return i;
                         }).ToList();
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case 5:
+                        Console.Clear();
                         Console.WriteLine("Anna uusi tuhlatun aja arvio");
                         double tuhaika = Convert.ToDouble(Console.ReadLine());
                         listuri.Select(i =>
@@ -341,8 +344,11 @@ namespace Oppikirja
                             if (i.Id == num) i.TimeSpent = tuhaika;
                             return i;
                         }).ToList();
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case 6:
+                        Console.Clear();
                         Console.WriteLine("Anna uusi lähde");
                         string lähde = Console.ReadLine();
                         listuri.Select(i =>
@@ -350,8 +356,11 @@ namespace Oppikirja
                             if (i.Id == num) i.Source = lähde;
                             return i;
                         }).ToList();
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case 7:
+                        Console.Clear();
                         Console.WriteLine("Anna uusi aloituspäivä");
                         DateTime alote = Convert.ToDateTime(Console.ReadLine());
                         listuri.Select(i =>
@@ -359,37 +368,30 @@ namespace Oppikirja
                             if (i.Id == num) i.StartLearningDate = alote;
                             return i;
                         }).ToList();
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case 8:
-                        Console.WriteLine("Oletko saanut homman valmiiksi? Y/N");
-                        string kesken = Console.ReadLine();
-                        if (kesken == "Y")
-                        {
-
-                            listuri.Select(i =>
-                            {
-                                if (i.Id == num) i.InProgress = true;
-                                return i;
-                            }).ToList();
-                        }
-                        if (kesken == "N")
-                        {
-
-                            listuri.Select(i =>
-                            {
-                                if (i.Id == num) i.InProgress = false;
-                                return i;
-                            }).ToList();
-                        }
-                        break;
-                    case 9:
-                        Console.WriteLine("Anna uusi ID");
+                        Console.Clear();
+                        Console.WriteLine("Anna uusi Valmistumipäivä");
                         DateTime lopete = Convert.ToDateTime(Console.ReadLine());
                         listuri.Select(i =>
                         {
                             if (i.Id == num) i.CompletionDate = lopete;
                             return i;
                         }).ToList();
+                        Console.ReadLine();
+                        Console.Clear();
+                        break;
+                    case 9:
+
+                        var lista = listuri.Where(x => (x.Id == num));
+                        foreach(var o in lista)
+                        {
+                            Console.WriteLine(o.Tulostus());
+                        }
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
 
                 }
@@ -440,10 +442,22 @@ namespace Oppikirja
                     CompletionDate = topi.CompletionDate
                 });
                 uusTopi.Add(topi.Id, topi);
-                }
                 
-            } 
+                
+            
 
+            }
+          }
+        public static void Rza(List<Topic> listuri)
+        {
+            foreach (var i in listuri)
+            {
+                Console.WriteLine(i.Id);
+                Console.WriteLine(i.Title);
+            }
+            Console.ReadLine();
+            return;
+        }
         }
 
     }

@@ -1,6 +1,5 @@
-1,Jere,Johannes,2,3,www.google.com,20/02/2022 0.00.00,True,15/06/2022 0.00.00
-2,Jere,Kalle,5,5,www.google.com,12/02/2002 0.00.00,True,15/06/2022 0.00.00
-3,Kalle,Toivio,3,4,www.com,21/02/2009 0.00.00,True,15/06/2022 0.00.00
-4,Jaska,kalle,2,3,www.com,01/01/2001 0.00.00,True,15/06/2022 0.00.00
-5,Katriina,Kallenkeskimies,4,5,www.com.com,12/06/0299 0.00.00,True,16/06/2022 0.00.00
-6,Aki,Viemäri,2,3,www.com.fi,12/02/2002 0.00.00,True,16/06/2022 0.00.00
+1111,Kalevala,Tosi jännä kirja,6,3,www.youtube.com,02/06/2022 0.00.00,True,17/06/2022 0.00.00
+1,Kalevala,Tosi jännä kirja,6,3,www.youtube.com,02/06/2022 0.00.00,True,17/06/2022 0.00.00
+2,Jeren Seikkailu,Mahtavin kirja ikinä,6,2,www.google.com,01/02/2022 0.00.00,False,05/05/2022 0.00.00
+3,Visual coding for Babies,Koodauksen perusteet jos ei onnistu,12,6,www.amazon.com,01/01/2022 0.00.00,True,17/06/2022 0.00.00
+4,Linq,Paras kaveri josta et ymmärrä mitään,999,10,www.apuajeesukselta.fi,12/06/2022 0.00.00,True,17/06/2022 0.00.00
