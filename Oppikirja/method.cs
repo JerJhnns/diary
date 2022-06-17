@@ -17,25 +17,8 @@ namespace Oppikirja
 
         public static void Methodman(string path, Dictionary<int, Topic> uusTopi, Topic topi, List<Topic> listuri, string path2)
         {
-
-
-
-
-
-
-
-            try
-            {
-                
-                Console.WriteLine("Anna aiheen tunniste");
-                topi.Id = Convert.ToInt32(Console.ReadLine());
                 topi.Id = listuri.Count + 1;
-              
-
-
-            }
-            catch (Exception e) { Console.WriteLine(e.Message); }
-
+    
             try
             {
                 Console.WriteLine("Aiheen otsikko");
@@ -83,9 +66,6 @@ namespace Oppikirja
                     topi.CompletionDate = Convert.ToDateTime(Console.ReadLine());
                 }
                 catch (Exception e) { Console.WriteLine(e.Message); }
-
-
-
             }
             try
             {
@@ -124,6 +104,7 @@ namespace Oppikirja
             foreach ( var i in listuri.ToList())
             {
                 if (i.Id == num) {
+
                     listuri.Remove(i);
                 }
                 if (i.Title == nim)
@@ -255,13 +236,18 @@ namespace Oppikirja
                         var lista = listuri.Where(x => (x.Title == nim));
                         foreach (var o in lista)
                         {
-                            Console.WriteLine(o.Tulostus());
+                            if (o.InProgress == true)
+                            {
+                                Console.WriteLine(o.Tulostus());
+                            }
+                            else
+                            {
+                                Console.WriteLine(o.Jalostus());
+                            }
                         }
                         Console.ReadLine();
                         Console.Clear();
                         break;
-                        
-
                 }
                
             }
@@ -300,7 +286,6 @@ namespace Oppikirja
                         Console.Clear();
                         Console.WriteLine("Anna uusi Title");
                         string uusiTitle = Console.ReadLine();
-
                         listuri.Select(i =>
                         {
                             if (i.Id == num) i.Title = uusiTitle;
@@ -308,8 +293,6 @@ namespace Oppikirja
                         }).ToList();
                         Console.ReadLine();
                         Console.Clear();
-
-
                         break;
                     case 3:
                         Console.Clear();
@@ -384,16 +367,21 @@ namespace Oppikirja
                         Console.Clear();
                         break;
                     case 9:
-
                         var lista = listuri.Where(x => (x.Id == num));
                         foreach(var o in lista)
                         {
-                            Console.WriteLine(o.Tulostus());
+                            if (o.InProgress == true)
+                            {
+                                Console.WriteLine(o.Tulostus());
+                            }
+                            else
+                            {
+                                Console.WriteLine(o.Jalostus());
+                            }
                         }
                         Console.ReadLine();
                         Console.Clear();
                         break;
-
                 }
                 
             }
@@ -415,11 +403,7 @@ namespace Oppikirja
             string[] csv = File.ReadAllLines(@"C:\Users\Jere\source\repos\Oppikirja\Id.txt");
             for (int i = 1; i < csv.Length; i++)
             {
-
-
                 string[] dataCsv = csv[i].Split(',');
-
-
                 topi.Id = Convert.ToInt32(dataCsv[0]);
                 topi.Title = dataCsv[1];
                 topi.Description = dataCsv[2];
@@ -442,16 +426,13 @@ namespace Oppikirja
                     CompletionDate = topi.CompletionDate
                 });
                 uusTopi.Add(topi.Id, topi);
-                
-                
-            
-
             }
           }
         public static void Rza(List<Topic> listuri)
         {
             foreach (var i in listuri)
             {
+
                 Console.WriteLine(i.Id);
                 Console.WriteLine(i.Title);
             }

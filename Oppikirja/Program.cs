@@ -40,8 +40,6 @@ namespace Oppikirja
                     "\nValitse 6: jos haluat lopettaa.");
                 
                 valinta = Convert.ToInt32(Console.ReadLine());
-                
-                
 
                 switch (valinta)
                 {
@@ -51,41 +49,43 @@ namespace Oppikirja
                         Console.Clear();
                         break;
                     case 2:
+
                         Console.Clear();
                         Method.Redman(uusTopi, topi, path, listuri);
                         Console.Clear();
                         break;
+
                     case 3:
                         Console.Clear();
                         Method.Ghostfacekillah(topi, listuri);
                         Console.Clear();
                         break;
+
                     case 4:
                         Console.Clear();
                         Method.Raekwon();
                         Console.Clear();
                         break;
-
                         
                     case 5:
                         Console.Clear();
                         Method.Rza(listuri);
                         Console.Clear();
                         break;
+
                     case 6:
                         Console.Clear();
-                        
                         Console.WriteLine("---------------------------");
                         Console.WriteLine("\tTervemenoa!");
                         Console.WriteLine("---------------------------");
                         Console.WriteLine("\n\n\n\n\nSovellus on myynnissä lähtöhinta: 1 euro enemmän kuin Wolt");
                         break;
+
                     default:
                         Console.Clear();
                         Console.WriteLine("---------------------------");
                         Console.WriteLine( "\nInvalid choice mate\n");
                         Console.WriteLine("---------------------------");
-                        
                         break;
                 }
                

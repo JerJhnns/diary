@@ -32,7 +32,12 @@ namespace Oppikirja
         public string Tulostus()
         {
             return $"ID: {Id}\nAihe: {Title}\nKuvaus{Description}\nSinulla on : {EstimatedTimeToMaster - TimeSpent}h jäljellä\n" +
-                $"Lähde: {Source}\nOlet opiskellut {(CompletionDate - StartLearningDate).TotalDays} päivää";
+                $"Lähde: {Source}\nOpiskelusi on vielä kesken mutta olet opiskellut {(CompletionDate - StartLearningDate).TotalDays} päivää";
+        }
+        public string Jalostus()
+        {
+            return $"ID: {Id}\nAihe: {Title}\nKuvaus{Description}\nSinulla on : {EstimatedTimeToMaster - TimeSpent}h jäljellä\n" +
+                $"Lähde: {Source}\nSait opiskelusi valmiiksi {(CompletionDate - StartLearningDate).TotalDays} päivässä";
         }
     }
 }
