@@ -7,6 +7,9 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using System.Linq;
 using System.ComponentModel;
+using Oppikirja.Models;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace Oppikirja
 {
@@ -15,7 +18,7 @@ namespace Oppikirja
 
     {
 
-        public static void Methodman(string path, Dictionary<int, Topic> uusTopi, Topic topi, List<Topic> listuri, string path2)
+        public static void Methodman(Topic topi, List<Topic> listuri)
         {
                 topi.Id = listuri.Count + 1;
     
@@ -89,13 +92,26 @@ namespace Oppikirja
                 InProgress = topi.InProgress,
                 CompletionDate = topi.CompletionDate
             });
-            uusTopi.Add(topi.Id, topi);
-            var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8}", topi.Id, topi.Title, topi.Description, topi.EstimatedTimeToMaster
-             ,topi.TimeSpent, topi.Source, topi.StartLearningDate, topi.InProgress, topi.CompletionDate);
-
-            File.AppendAllText(path, newLine + Environment.NewLine);
+            
 
 
+            using (DiaryContext kokeilu = new DiaryContext())
+            {
+                Table1 pöytä = new Table1()
+                {
+                    Id = topi.Id,
+                    Title = topi.Title,
+                    Description = topi.Description,
+                    TimeToMaster = Convert.ToInt32(topi.EstimatedTimeToMaster),
+                    TimeSpent = Convert.ToInt32(topi.TimeSpent),
+                    Source = topi.Source,
+                    StartLearningDate = topi.StartLearningDate,
+                    InProgress = topi.InProgress,
+                    CompletionDate = topi.CompletionDate
+                };
+                kokeilu.Table1s.Add(pöytä);
+                kokeilu.SaveChanges();
+            }
         }
         public static void Gza(Topic topi, List<Topic> listuri, int num, string nim)
         {
@@ -116,7 +132,7 @@ namespace Oppikirja
           
         }
 
-        public static void Redman(Dictionary<int, Topic> uusTopi, Topic topi, string path, List<Topic> listuri)
+        public static void Redman( Topic topi,  List<Topic> listuri)
         {
             Console.WriteLine("Anna Title");
 
@@ -126,15 +142,16 @@ namespace Oppikirja
             if (listuri.Select(a => a.Title == nim).Any())
             {
 
-                Console.WriteLine("Mitä haluat muokata");
+                Console.WriteLine("Vauuu löysit oikeean paikkaan.");
                 Console.WriteLine("1.Poista tieto\n" +
-                    "2.Title\n" +
-                    "3.Description\n" +
-                    "4.Estimated Time\n" +
-                    "5. Tuhlattu aikan\n" +
+                    "Muokkaa tietoja"+
+                    "2. Otsikko\n" +
+                    "3. Kommentti\n" +
+                    "4. Opiskeluun tarvittava aika\n" +
+                    "5. Tuhlattu aika\n" +
                     "6. Lähde\n" +
-                    "7. Aloitus aika\n" +
-                    "8. Valmistumispäivä\n" +
+                    "7. Aloitus päivämäärä\n" +
+                    "8. Valmistumispäivä\n\n" +
                     "9. Tarkasta tiedot");
                 int valinta = Convert.ToInt32(Console.ReadLine());
                 Console.Clear();
@@ -147,7 +164,7 @@ namespace Oppikirja
                         break;
                     case 2:
                         Console.Clear();
-                        Console.WriteLine("Anna uusi Title");
+                        Console.WriteLine("Anna uusi otsikko");
                         string uusiTitle = Console.ReadLine();
 
                         listuri.Select(i =>
@@ -161,7 +178,7 @@ namespace Oppikirja
                         break;
                     case 3:
                         Console.Clear();
-                        Console.WriteLine("Anna uusi Description");
+                        Console.WriteLine("Anna uusi kommentti");
                         string uusiDes = Console.ReadLine();
                         listuri.Select(i =>
                         {
@@ -173,7 +190,7 @@ namespace Oppikirja
                         break;
                     case 4:
                         Console.Clear();
-                        Console.WriteLine("Anna uusi aika arvio");
+                        Console.WriteLine("Anna uusi aika-arvio");
                         double aika = Convert.ToDouble(Console.ReadLine());
                         listuri.Select(i =>
                         {
@@ -221,10 +238,11 @@ namespace Oppikirja
                         break;
                     case 8:
                         Console.Clear();
-                        Console.WriteLine("Anna uusi Valmistumipäivä");
+                        Console.WriteLine("Anna uusi valmistumipäivä");
                         DateTime lopete = Convert.ToDateTime(Console.ReadLine());
                         listuri.Select(i =>
                         {
+                            i.InProgress = false;
                             if (i.Title == nim) i.CompletionDate = lopete;
                             return i;
                         }).ToList();
@@ -265,13 +283,14 @@ namespace Oppikirja
 
                 Console.WriteLine("Mitä haluat muokata");
                 Console.WriteLine("1.Poista tieto\n" +
-                    "2.Title\n" +
-                    "3.Description\n" +
-                    "4.Estimated Time\n" +
-                    "5. Tuhlattu aikan\n" +
+                    "Muokkaa tietoja" +
+                    "2. Otsikko\n" +
+                    "3. Kommentti\n" +
+                    "4. Opiskeluun tarvittava aika\n" +
+                    "5. Tuhlattu aika\n" +
                     "6. Lähde\n" +
-                    "7. Aloitus aika\n" +
-                    "8. Valmitumispäivä\n" +
+                    "7. Aloitus päivämäärä\n" +
+                    "8. Valmistumispäivä\n\n" +
                     "9. Tarkasta tiedot");
                 int valinta = Convert.ToInt32(Console.ReadLine());
                 Console.Clear();
@@ -279,12 +298,12 @@ namespace Oppikirja
                 {
                     case 1:
                         Console.Clear();
-                        Console.WriteLine("Poista osio");
+                        Console.WriteLine("Poista tiedosto");
                         Gza(topi, listuri, num, nim);
                         break;
                     case 2:
                         Console.Clear();
-                        Console.WriteLine("Anna uusi Title");
+                        Console.WriteLine("Anna uusi otsikko");
                         string uusiTitle = Console.ReadLine();
                         listuri.Select(i =>
                         {
@@ -296,7 +315,7 @@ namespace Oppikirja
                         break;
                     case 3:
                         Console.Clear();
-                        Console.WriteLine("Anna uusi Description");
+                        Console.WriteLine("Anna uusi kommentti");
                         string uusiDes = Console.ReadLine();
                         listuri.Select(i =>
                         {
@@ -360,6 +379,7 @@ namespace Oppikirja
                         DateTime lopete = Convert.ToDateTime(Console.ReadLine());
                         listuri.Select(i =>
                         {
+                            i.InProgress = false;
                             if (i.Id == num) i.CompletionDate = lopete;
                             return i;
                         }).ToList();
@@ -387,32 +407,17 @@ namespace Oppikirja
             }
             else { }
         }
-        public static void Raekwon()
+        public static void Raekwon(List<Topic> listuri )
         {
-            if (!File.Exists(@"C:\Users\Jere\source\repos\Oppikirja\Id.txt"))
-                File.Create(@"C:\Users\Jere\source\repos\Oppikirja\Id.txt");
+            
+                
+             
 
-            TextWriter tw = new StreamWriter(@"C:\Users\Jere\source\repos\Oppikirja\Id.txt", false);
-            tw.Write(string.Empty);
-            tw.Close();
-
-            Console.WriteLine("Poistit kaiken");
+            
         }
-        public static void OldDirtyBastard(string path, Topic topi, Dictionary<int, Topic> uusTopi, List<Topic> listuri)
+        public static void OldDirtyBastard( Topic topi, List<Topic> listuri)
         {
-            string[] csv = File.ReadAllLines(@"C:\Users\Jere\source\repos\Oppikirja\Id.txt");
-            for (int i = 1; i < csv.Length; i++)
-            {
-                string[] dataCsv = csv[i].Split(',');
-                topi.Id = Convert.ToInt32(dataCsv[0]);
-                topi.Title = dataCsv[1];
-                topi.Description = dataCsv[2];
-                topi.EstimatedTimeToMaster = Convert.ToDouble(dataCsv[3]);
-                topi.TimeSpent = Convert.ToDouble(dataCsv[4]);
-                topi.Source = dataCsv[5];
-                topi.StartLearningDate = Convert.ToDateTime(dataCsv[6]);
-                topi.InProgress = Convert.ToBoolean(dataCsv[7]);
-                topi.CompletionDate = Convert.ToDateTime(dataCsv[8]);
+           
                 
                 listuri.Add(new Topic {
                     Id = topi.Id,
@@ -425,8 +430,8 @@ namespace Oppikirja
                     InProgress = topi.InProgress,
                     CompletionDate = topi.CompletionDate
                 });
-                uusTopi.Add(topi.Id, topi);
-            }
+               
+            
           }
         public static void Rza(List<Topic> listuri)
         {

@@ -7,6 +7,8 @@ using CsvHelper;
 using System.Globalization;
 using System.Text;
 using CsvHelper.Configuration;
+using System.Data;
+using Oppikirja.Models;
 
 namespace Oppikirja
 {
@@ -14,14 +16,13 @@ namespace Oppikirja
     {
         public static void Main(string[] args)
         {
-            Dictionary<int, Topic> uusTopi = new Dictionary<int, Topic>();
+            
+            
             List<Topic> listuri = new List<Topic>();
-            string path = @"C:\Users\Jere\source\repos\Oppikirja\Id.txt";
-            string path2 = @"C:\Users\Jere\source\repos\Oppikirja\uusi.csv";
             Topic topi = new Topic();
-            Method.OldDirtyBastard(path, topi, uusTopi, listuri);
+            
             int valinta ;
-
+            Method.OldDirtyBastard( topi,  listuri);
             Console.ForegroundColor
             = ConsoleColor.Blue;
             Console.WriteLine("---------------------------");
@@ -29,8 +30,29 @@ namespace Oppikirja
             Console.WriteLine("---------------------------");
             Console.ForegroundColor
             = ConsoleColor.White;
+            var context = new DiaryContext();
+            var t = (from s in context.Table1s select s).ToList();
+            foreach( var on in t )
+            {
+                listuri.Add(new Topic
+                {
+                    Id = on.Id,
+                    Title = on.Title,
+                    Description = on.Description,
+                    EstimatedTimeToMaster = Convert.ToDouble(on.TimeToMaster),
+                    TimeSpent = Convert.ToDouble(on.TimeSpent),
+                    Source = on.Source,
+                    StartLearningDate = Convert.ToDateTime(on.StartLearningDate),
+                    InProgress = Convert.ToBoolean(on.InProgress),
+                    CompletionDate = Convert.ToDateTime(on.CompletionDate)
+                });
+            };
+            
+
+
             do
             {
+
                 Console.WriteLine(
                     "Vaihtoehtosi \nValitse 1: Jos haluat lisätä opinnon. " +
                     "\nValitse 2: Jos haluat tarkastaa, muokata tai poistaa Titlellä \n" +
@@ -45,13 +67,13 @@ namespace Oppikirja
                 {
                     case 1:
                         Console.Clear();
-                        Method.Methodman(path,uusTopi,topi, listuri, path2 );
+                        Method.Methodman(topi, listuri );
                         Console.Clear();
                         break;
                     case 2:
 
                         Console.Clear();
-                        Method.Redman(uusTopi, topi, path, listuri);
+                        Method.Redman( topi, listuri);
                         Console.Clear();
                         break;
 
@@ -63,7 +85,7 @@ namespace Oppikirja
 
                     case 4:
                         Console.Clear();
-                        Method.Raekwon();
+                        
                         Console.Clear();
                         break;
                         

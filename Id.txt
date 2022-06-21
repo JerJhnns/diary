@@ -1,6 +1,0 @@
-1111,Kalevala,Tosi jännä kirja,6,3,www.youtube.com,02/06/2022 0.00.00,True,17/06/2022 0.00.00
-1,Kalevala,Tosi jännä kirja,6,3,www.youtube.com,02/06/2022 0.00.00,True,17/06/2022 0.00.00
-2,Jeren Seikkailu,Mahtavin kirja ikinä,6,2,www.google.com,01/02/2022 0.00.00,False,05/05/2022 0.00.00
-3,Visual coding for Babies,Koodauksen perusteet jos ei onnistu,12,6,www.amazon.com,01/01/2022 0.00.00,True,17/06/2022 0.00.00
-4,Linq,Paras kaveri josta et ymmärrä mitään,999,10,www.apuajeesukselta.fi,12/06/2022 0.00.00,True,17/06/2022 0.00.00
-5,Kalevi Sorsamestari,kaunis kertomus,77,2,www.kalevifanclub.fi,12/02/1994 0.00.00,True,17/06/2022 0.00.00
