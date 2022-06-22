@@ -10,6 +10,7 @@ using System.ComponentModel;
 using Oppikirja.Models;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using Oppikirja;
 
 namespace Oppikirja
 {
@@ -178,69 +179,38 @@ namespace Oppikirja
                         Console.WriteLine("Anna uusi otsikko");
                         string uusiTitle = Console.ReadLine();
 
-                        listuri.Select(i =>
-                         {
-                             if (i.Title == nim) i.Title = uusiTitle;
-                             return i;
-                         }).ToList();
                         
                         foreach(var o in jolo)
                         {
                             o.Title = uusiTitle;
-                            
                         }
-                       
-                        Console.ReadLine();
-                        Console.Clear();
-
                         break;
                     case 3:
                         Console.Clear();
                         Console.WriteLine("Anna uusi kommentti");
                         string uusiDes = Console.ReadLine();
-                        listuri.Select(i =>
-                        {
-                            if (i.Title == nim) i.Description = uusiDes;
-                            return i;
-                        }).ToList();
-                        
+                       
                         foreach (var o in jolo)
                         {
                             o.Description = uusiDes;
-
                         }
                         yolo.SaveChanges();
-                        Console.ReadLine();
-                        Console.Clear();
                         break;
                     case 4:
                         Console.Clear();
                         Console.WriteLine("Anna uusi aika-arvio");
                         double aika = Convert.ToDouble(Console.ReadLine());
-                        listuri.Select(i =>
-                        {
-                            if (i.Title == nim) i.EstimatedTimeToMaster = aika;
-                            return i;
-                        }).ToList();
-                        
+                       
                         foreach (var o in jolo)
                         {
                             o.TimeToMaster = Convert.ToInt32(aika);
-
                         }
                         yolo.SaveChanges();
-                        Console.ReadLine();
-                        Console.Clear();
                         break;
                     case 5:
                         Console.Clear();
                         Console.WriteLine("Anna uusi tuhlatun aja arvio");
                         double tuhaika = Convert.ToDouble(Console.ReadLine());
-                        listuri.Select(i =>
-                        {
-                            if (i.Title == nim) i.TimeSpent = tuhaika;
-                            return i;
-                        }).ToList();
                         
                         foreach (var o in jolo)
                         {
@@ -248,68 +218,47 @@ namespace Oppikirja
 
                         }
                         yolo.SaveChanges();
-                        Console.ReadLine();
-                        Console.Clear();
                         break;
                     case 6:
                         Console.Clear();
                         Console.WriteLine("Anna uusi lähde");
                         string lähde = Console.ReadLine();
-                        listuri.Select(i =>
-                        {
-                            if (i.Title == nim) i.Source = lähde;
-                            return i;
-                        }).ToList();
+                        
                         foreach (var o in jolo)
                         {
                             o.Source = lähde;
 
                         }
                         yolo.SaveChanges();
-                        Console.ReadLine();
-                        Console.Clear();
                         break;
                     case 7:
                         Console.Clear();
                         Console.WriteLine("Anna uusi aloituspäivä");
                         DateTime alote = Convert.ToDateTime(Console.ReadLine());
-                        listuri.Select(i =>
-                        {
-                            if (i.Title == nim) i.StartLearningDate = alote;
-                            return i;
-                        }).ToList();
+                        
                         foreach (var o in jolo)
                         {
                             o.StartLearningDate = Convert.ToDateTime(alote);
 
                         }
                         yolo.SaveChanges();
-                        Console.ReadLine();
-                        Console.Clear();
                         break;
                     case 8:
                         Console.Clear();
                         Console.WriteLine("Anna uusi valmistumipäivä");
                         DateTime lopete = Convert.ToDateTime(Console.ReadLine());
-                        listuri.Select(i =>
-                        {
-                            i.InProgress = false;
-                            if (i.Title == nim) i.CompletionDate = lopete;
-                            return i;
-                        }).ToList();
+                       
                         foreach (var o in jolo)
                         {
                             o.CompletionDate = Convert.ToDateTime(lopete);
                             o.InProgress = false;
                         }
                         yolo.SaveChanges();
-                        Console.ReadLine();
-                        Console.Clear();
                         break;
                     case 9:
                         Console.Clear();
-                        var lista = listuri.Where(x => (x.Title == nim));
-                        foreach (var o in lista)
+                        
+                        foreach (var o in jolo)
                         {
                             if (o.InProgress == true)
                             {
@@ -320,8 +269,6 @@ namespace Oppikirja
                                 Console.WriteLine(o.Jalostus());
                             }
                         }
-                        Console.ReadLine();
-                        Console.Clear();
                         var t = (from s in context.Table1s select s).ToList();
                         foreach (var on in t)
                         {
@@ -379,133 +326,82 @@ namespace Oppikirja
                         Console.Clear();
                         Console.WriteLine("Anna uusi otsikko");
                         string uusiTitle = Console.ReadLine();
-                        listuri.Select(i =>
-                        {
-                            if (i.Id == num) i.Title = uusiTitle;
-                            return i;
-                        }).ToList();
+                        
                         foreach (var o in jolo)
                         {
                             o.Title = uusiTitle;
 
                         }
                         yolo.SaveChanges();
-                        Console.ReadLine();
-                        Console.Clear();
                         break;
                     case 3:
                         Console.Clear();
                         Console.WriteLine("Anna uusi kommentti");
                         string uusiDes = Console.ReadLine();
-                        listuri.Select(i =>
-                        {
-                            if (i.Id == num) i.Description = uusiDes;
-                            return i;
-                        }).ToList();
+                      
                         foreach (var o in jolo)
                         {
                             o.Description = uusiDes;
-
                         }
                         yolo.SaveChanges();
-                        Console.ReadLine();
-                        Console.Clear();
                         break;
                     case 4:
                         Console.Clear();
                         Console.WriteLine("Anna uusi aika arvio");
-                        double aika = Convert.ToDouble(Console.ReadLine());
-                        listuri.Select(i =>
-                        {
-                            if (i.Id == num) i.EstimatedTimeToMaster = aika;
-                            return i;
-                        }).ToList();
+                        var aika = Convert.ToDouble(Console.ReadLine());
                         foreach (var o in jolo)
                         {
                             o.TimeToMaster = Convert.ToInt32(aika);
-
                         }
                         yolo.SaveChanges();
-                        Console.ReadLine();
-                        Console.Clear();
                         break;
                     case 5:
                         Console.Clear();
                         Console.WriteLine("Anna uusi tuhlatun aja arvio");
                         double tuhaika = Convert.ToDouble(Console.ReadLine());
-                        listuri.Select(i =>
-                        {
-                            if (i.Id == num) i.TimeSpent = tuhaika;
-                            return i;
-                        }).ToList(); 
+                        
                         foreach (var o in jolo)
                         {
                             o.TimeSpent = Convert.ToInt32(tuhaika);
-
                         }
                         yolo.SaveChanges();
-                        Console.ReadLine();
-                        Console.Clear();
                         break;
                     case 6:
                         Console.Clear();
                         Console.WriteLine("Anna uusi lähde");
                         string lähde = Console.ReadLine();
-                        listuri.Select(i =>
-                        {
-                            if (i.Id == num) i.Source = lähde;
-                            return i;
-                        }).ToList();
                         foreach (var o in jolo)
                         {
                             o.Source = lähde;
-
                         }
                         yolo.SaveChanges();
-                        Console.ReadLine();
-                        Console.Clear();
                         break;
                     case 7:
                         Console.Clear();
                         Console.WriteLine("Anna uusi aloituspäivä");
                         DateTime alote = Convert.ToDateTime(Console.ReadLine());
-                        listuri.Select(i =>
-                        {
-                            if (i.Id == num) i.StartLearningDate = alote;
-                            return i;
-                        }).ToList();
+                        
                         foreach (var o in jolo)
                         {
                             o.StartLearningDate = alote;
-
                         }
                         yolo.SaveChanges();
-                        Console.ReadLine();
-                        Console.Clear();
                         break;
                     case 8:
                         Console.Clear();
                         Console.WriteLine("Anna uusi Valmistumipäivä");
                         DateTime lopete = Convert.ToDateTime(Console.ReadLine());
-                        listuri.Select(i =>
-                        {
-                            i.InProgress = false;
-                            if (i.Id == num) i.CompletionDate = lopete;
-                            return i;
-                        }).ToList();
+                        
                         foreach (var o in jolo)
                         {
                             o.InProgress = false;
                             o.CompletionDate = lopete;
-
                         }
                         yolo.SaveChanges();
-                        Console.ReadLine();
-                        Console.Clear();
                         break;
                     case 9:
-                        var lista = listuri.Where(x => (x.Id == num));
-                        foreach(var o in lista)
+                        Console.Clear();
+                        foreach(var o in jolo)
                         {
                             if (o.InProgress == true)
                             {
@@ -517,7 +413,6 @@ namespace Oppikirja
                             }
                         }
                         Console.ReadLine();
-                        Console.Clear();
                         break;
                 }
                 
@@ -539,7 +434,7 @@ namespace Oppikirja
            
                 
                 listuri.Add(new Topic {
-                    
+                   
                     Title = topi.Title,
                     Description = topi.Description,
                     EstimatedTimeToMaster = topi.EstimatedTimeToMaster,
@@ -552,17 +447,20 @@ namespace Oppikirja
                
             
           }
-        public static void Rza(List<Topic> listuri)
+        public static void Rza()
         {
-            foreach (var i in listuri)
+            DiaryContext kalle = new DiaryContext();
+            var jolo = (from o in kalle.Table1s  select o).ToList();
+            foreach (var i in jolo)
             {
 
-                Console.WriteLine(i.Id);
-                Console.WriteLine(i.Title);
+                Console.WriteLine("ID: "+i.Id + " " + i.Title);
+               
             }
             Console.ReadLine();
             return;
         }
+
         }
 
     }

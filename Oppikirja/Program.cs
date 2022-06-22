@@ -91,7 +91,7 @@ namespace Oppikirja
                         
                     case 5:
                         Console.Clear();
-                        Method.Rza(listuri);
+                        Method.Rza();
                         Console.Clear();
                         break;
 

@@ -58,5 +58,6 @@ namespace Oppikirja.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+       
     }
 }
