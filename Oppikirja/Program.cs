@@ -73,7 +73,7 @@ namespace Oppikirja
                     case 2:
 
                         Console.Clear();
-                        Method.Redman( topi, listuri);
+                        Method.Redman( topi, listuri, context);
                         Console.Clear();
                         break;
 

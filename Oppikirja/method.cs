@@ -20,7 +20,7 @@ namespace Oppikirja
 
         public static void Methodman(Topic topi, List<Topic> listuri)
         {
-                topi.Id = listuri.Count + 1;
+              
     
             try
             {
@@ -99,7 +99,7 @@ namespace Oppikirja
             {
                 Table1 pöytä = new Table1()
                 {
-                    Id = topi.Id,
+                    
                     Title = topi.Title,
                     Description = topi.Description,
                     TimeToMaster = Convert.ToInt32(topi.EstimatedTimeToMaster),
@@ -116,7 +116,9 @@ namespace Oppikirja
         public static void Gza(Topic topi, List<Topic> listuri, int num, string nim)
         {
             Console.Clear();
-     
+            DiaryContext yolo = new DiaryContext();
+            var jolo = (from o in yolo.Table1s where o.Title == nim select o).ToList();
+            var jojo = (from o in yolo.Table1s where o.Id == num select o).ToList();
             foreach ( var i in listuri.ToList())
             {
                 if (i.Id == num) {
@@ -128,14 +130,22 @@ namespace Oppikirja
                     listuri.Remove(i);
                 }
             }
+            foreach( var o in jolo)
+            {
+                yolo.Remove(o);
 
-          
+            }
+            foreach (var o in jojo)
+            {
+                yolo.Remove(o);
+            }
+            yolo.SaveChanges();
         }
 
-        public static void Redman( Topic topi,  List<Topic> listuri)
+        public static void Redman( Topic topi,  List<Topic> listuri, DiaryContext context)
         {
             Console.WriteLine("Anna Title");
-
+            DiaryContext yolo = new DiaryContext();
             int num = 2;
             string nim = Console.ReadLine();
             Console.Clear();
@@ -144,7 +154,7 @@ namespace Oppikirja
 
                 Console.WriteLine("Vauuu löysit oikeean paikkaan.");
                 Console.WriteLine("1.Poista tieto\n" +
-                    "Muokkaa tietoja"+
+                    "Muokkaa tietoja\n\n"+
                     "2. Otsikko\n" +
                     "3. Kommentti\n" +
                     "4. Opiskeluun tarvittava aika\n" +
@@ -155,6 +165,7 @@ namespace Oppikirja
                     "9. Tarkasta tiedot");
                 int valinta = Convert.ToInt32(Console.ReadLine());
                 Console.Clear();
+                var jolo = (from o in yolo.Table1s where o.Title == nim select o).ToList();
                 switch (valinta)
                 {
                     case 1:
@@ -172,6 +183,13 @@ namespace Oppikirja
                              if (i.Title == nim) i.Title = uusiTitle;
                              return i;
                          }).ToList();
+                        
+                        foreach(var o in jolo)
+                        {
+                            o.Title = uusiTitle;
+                            
+                        }
+                       
                         Console.ReadLine();
                         Console.Clear();
 
@@ -185,6 +203,13 @@ namespace Oppikirja
                             if (i.Title == nim) i.Description = uusiDes;
                             return i;
                         }).ToList();
+                        
+                        foreach (var o in jolo)
+                        {
+                            o.Description = uusiDes;
+
+                        }
+                        yolo.SaveChanges();
                         Console.ReadLine();
                         Console.Clear();
                         break;
@@ -197,6 +222,13 @@ namespace Oppikirja
                             if (i.Title == nim) i.EstimatedTimeToMaster = aika;
                             return i;
                         }).ToList();
+                        
+                        foreach (var o in jolo)
+                        {
+                            o.TimeToMaster = Convert.ToInt32(aika);
+
+                        }
+                        yolo.SaveChanges();
                         Console.ReadLine();
                         Console.Clear();
                         break;
@@ -209,6 +241,13 @@ namespace Oppikirja
                             if (i.Title == nim) i.TimeSpent = tuhaika;
                             return i;
                         }).ToList();
+                        
+                        foreach (var o in jolo)
+                        {
+                            o.TimeSpent = Convert.ToInt32(tuhaika);
+
+                        }
+                        yolo.SaveChanges();
                         Console.ReadLine();
                         Console.Clear();
                         break;
@@ -221,6 +260,12 @@ namespace Oppikirja
                             if (i.Title == nim) i.Source = lähde;
                             return i;
                         }).ToList();
+                        foreach (var o in jolo)
+                        {
+                            o.Source = lähde;
+
+                        }
+                        yolo.SaveChanges();
                         Console.ReadLine();
                         Console.Clear();
                         break;
@@ -233,6 +278,12 @@ namespace Oppikirja
                             if (i.Title == nim) i.StartLearningDate = alote;
                             return i;
                         }).ToList();
+                        foreach (var o in jolo)
+                        {
+                            o.StartLearningDate = Convert.ToDateTime(alote);
+
+                        }
+                        yolo.SaveChanges();
                         Console.ReadLine();
                         Console.Clear();
                         break;
@@ -246,6 +297,12 @@ namespace Oppikirja
                             if (i.Title == nim) i.CompletionDate = lopete;
                             return i;
                         }).ToList();
+                        foreach (var o in jolo)
+                        {
+                            o.CompletionDate = Convert.ToDateTime(lopete);
+                            o.InProgress = false;
+                        }
+                        yolo.SaveChanges();
                         Console.ReadLine();
                         Console.Clear();
                         break;
@@ -265,6 +322,22 @@ namespace Oppikirja
                         }
                         Console.ReadLine();
                         Console.Clear();
+                        var t = (from s in context.Table1s select s).ToList();
+                        foreach (var on in t)
+                        {
+                            listuri.Add(new Topic
+                            {
+                               
+                                Title = on.Title,
+                                Description = on.Description,
+                                EstimatedTimeToMaster = Convert.ToDouble(on.TimeToMaster),
+                                TimeSpent = Convert.ToDouble(on.TimeSpent),
+                                Source = on.Source,
+                                StartLearningDate = Convert.ToDateTime(on.StartLearningDate),
+                                InProgress = Convert.ToBoolean(on.InProgress),
+                                CompletionDate = Convert.ToDateTime(on.CompletionDate)
+                            });// LUO TÄSTÄ METODI 
+                        };
                         break;
                 }
                
@@ -276,14 +349,15 @@ namespace Oppikirja
             
             int num = Convert.ToInt32(Console.ReadLine());
             string nim = "";
-
+            DiaryContext yolo = new DiaryContext();
+            var jolo = (from o in yolo.Table1s where o.Id == num select o).ToList();
             Console.Clear();
             if (listuri.Select(a => a.Id == num).Any())
             {
 
                 Console.WriteLine("Mitä haluat muokata");
-                Console.WriteLine("1.Poista tieto\n" +
-                    "Muokkaa tietoja" +
+                Console.WriteLine("1.Poista tieto\n\n" +
+                    "Muokkaa tietoja\n" +
                     "2. Otsikko\n" +
                     "3. Kommentti\n" +
                     "4. Opiskeluun tarvittava aika\n" +
@@ -310,6 +384,12 @@ namespace Oppikirja
                             if (i.Id == num) i.Title = uusiTitle;
                             return i;
                         }).ToList();
+                        foreach (var o in jolo)
+                        {
+                            o.Title = uusiTitle;
+
+                        }
+                        yolo.SaveChanges();
                         Console.ReadLine();
                         Console.Clear();
                         break;
@@ -322,6 +402,12 @@ namespace Oppikirja
                             if (i.Id == num) i.Description = uusiDes;
                             return i;
                         }).ToList();
+                        foreach (var o in jolo)
+                        {
+                            o.Description = uusiDes;
+
+                        }
+                        yolo.SaveChanges();
                         Console.ReadLine();
                         Console.Clear();
                         break;
@@ -334,6 +420,12 @@ namespace Oppikirja
                             if (i.Id == num) i.EstimatedTimeToMaster = aika;
                             return i;
                         }).ToList();
+                        foreach (var o in jolo)
+                        {
+                            o.TimeToMaster = Convert.ToInt32(aika);
+
+                        }
+                        yolo.SaveChanges();
                         Console.ReadLine();
                         Console.Clear();
                         break;
@@ -345,7 +437,13 @@ namespace Oppikirja
                         {
                             if (i.Id == num) i.TimeSpent = tuhaika;
                             return i;
-                        }).ToList();
+                        }).ToList(); 
+                        foreach (var o in jolo)
+                        {
+                            o.TimeSpent = Convert.ToInt32(tuhaika);
+
+                        }
+                        yolo.SaveChanges();
                         Console.ReadLine();
                         Console.Clear();
                         break;
@@ -358,6 +456,12 @@ namespace Oppikirja
                             if (i.Id == num) i.Source = lähde;
                             return i;
                         }).ToList();
+                        foreach (var o in jolo)
+                        {
+                            o.Source = lähde;
+
+                        }
+                        yolo.SaveChanges();
                         Console.ReadLine();
                         Console.Clear();
                         break;
@@ -370,6 +474,12 @@ namespace Oppikirja
                             if (i.Id == num) i.StartLearningDate = alote;
                             return i;
                         }).ToList();
+                        foreach (var o in jolo)
+                        {
+                            o.StartLearningDate = alote;
+
+                        }
+                        yolo.SaveChanges();
                         Console.ReadLine();
                         Console.Clear();
                         break;
@@ -383,6 +493,13 @@ namespace Oppikirja
                             if (i.Id == num) i.CompletionDate = lopete;
                             return i;
                         }).ToList();
+                        foreach (var o in jolo)
+                        {
+                            o.InProgress = false;
+                            o.CompletionDate = lopete;
+
+                        }
+                        yolo.SaveChanges();
                         Console.ReadLine();
                         Console.Clear();
                         break;
@@ -407,20 +524,22 @@ namespace Oppikirja
             }
             else { }
         }
-        public static void Raekwon(List<Topic> listuri )
+        public static void Raekwon(List<Topic> listuri, Topic topi )
         {
             
-                
-             
 
-            
+
+
+
+
+
         }
         public static void OldDirtyBastard( Topic topi, List<Topic> listuri)
         {
            
                 
                 listuri.Add(new Topic {
-                    Id = topi.Id,
+                    
                     Title = topi.Title,
                     Description = topi.Description,
                     EstimatedTimeToMaster = topi.EstimatedTimeToMaster,

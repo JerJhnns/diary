@@ -23,7 +23,8 @@ namespace Oppikirja.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-L89MHDA\\;Database=Diary;Trusted_Connection=True;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=localhost\\;Database=Diary;Trusted_Connection=True;");
             }
         }
 
@@ -34,8 +35,6 @@ namespace Oppikirja.Models
             modelBuilder.Entity<Table1>(entity =>
             {
                 entity.ToTable("Table_1");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CompletionDate).HasColumnType("datetime");
 
@@ -59,10 +58,5 @@ namespace Oppikirja.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-        internal void Open()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
