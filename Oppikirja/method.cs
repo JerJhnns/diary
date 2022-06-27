@@ -21,48 +21,68 @@ namespace Oppikirja
 
         public static void Methodman(Topic topi, List<Topic> listuri)
         {
-              
-    
-            try
+
+
+            while (true)
             {
-                Console.WriteLine("Aiheen otsikko");
-                topi.Title = Console.ReadLine();
+                try
+                {
+                    Console.WriteLine("Aiheen otsikko");
+                    topi.Title = Console.ReadLine();
 
+                }
+                catch (Exception e) { Console.WriteLine(e.Message); continue; }
+                break;
             }
-            catch (Exception e) { Console.WriteLine(e.Message); }
-
             try
             {
                 Console.WriteLine("Anna aiheen kuvaus");
                 topi.Description = Console.ReadLine();
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
-            try
+            while (true)
             {
-                Console.WriteLine("Anna aika arvio h.m");
-                topi.EstimatedTimeToMaster = Convert.ToDouble(Console.ReadLine());
+
+
+                try
+                {
+                    Console.WriteLine("Anna aika arvio h.m");
+                    topi.EstimatedTimeToMaster = Convert.ToDouble(Console.ReadLine());
+                }
+                catch (Exception e) { Console.WriteLine(e.Message); continue; }
+                break;
             }
-            catch (Exception e) { Console.WriteLine(e.Message); }
             Console.WriteLine("Kauanko olet opiskellut h.m");
             topi.TimeSpent = Convert.ToDouble(Console.ReadLine());
-            try
+            while (true)
             {
-                Console.WriteLine("Anna mahdollinen lähde: ");
-                topi.Source = Console.ReadLine();
+
+
+                try
+                {
+                    Console.WriteLine("Anna mahdollinen lähde: ");
+                    topi.Source = Console.ReadLine();
+                }
+                catch (Exception e) { Console.WriteLine(e.Message); continue; }
+                break;
             }
-            catch (Exception e) { Console.WriteLine(e.Message); }
-            try
+            while (true)
             {
-                Console.WriteLine("Anna aloitus aika: dd/MM/yyyy ");
-                topi.StartLearningDate = Convert.ToDateTime(Console.ReadLine());
+                try
+                {
+                    Console.WriteLine("Anna aloitus aika: dd/MM/yyyy ");
+                    topi.StartLearningDate = Convert.ToDateTime(Console.ReadLine());
+                }
+                catch (Exception e) { Console.WriteLine(e.Message); continue; }
+                break;
             }
-            catch (Exception e) { Console.WriteLine(e.Message); }
             Console.WriteLine("Onko opiskelu kesken? Y/N");
             var valinta = Console.ReadLine();
 
 
             if (valinta == "N")
             {
+
                 try
                 {
                     topi.InProgress = false;
@@ -70,17 +90,20 @@ namespace Oppikirja
                     topi.CompletionDate = Convert.ToDateTime(Console.ReadLine());
                 }
                 catch (Exception e) { Console.WriteLine(e.Message); }
+
+
             }
-            try
-            {
-                if (valinta == "Y")
+            if (valinta == "Y")
+
+                try
                 {
                     topi.InProgress = true; topi.CompletionDate = DateTime.Today;
                 }
+                catch (Exception e) { Console.WriteLine(e.Message); }
 
-            }
-            catch (Exception e)
-            { Console.WriteLine(e.Message); }
+
+
+
             listuri.Add(new Topic
             {
                 Id = topi.Id,
@@ -93,14 +116,14 @@ namespace Oppikirja
                 InProgress = topi.InProgress,
                 CompletionDate = topi.CompletionDate
             });
-            
+
 
 
             using (DiaryContext kokeilu = new DiaryContext())
             {
                 Table1 pöytä = new Table1()
                 {
-                    
+
                     Title = topi.Title,
                     Description = topi.Description,
                     TimeToMaster = Convert.ToInt32(topi.EstimatedTimeToMaster),
@@ -113,24 +136,18 @@ namespace Oppikirja
                 kokeilu.Table1s.Add(pöytä);
                 kokeilu.SaveChanges();
             }
+            
+
         }
+       
         public static void Gza(Topic topi, List<Topic> listuri, int num, string nim)
         {
             Console.Clear();
             DiaryContext yolo = new DiaryContext();
             var jolo = (from o in yolo.Table1s where o.Title == nim select o).ToList();
             var jojo = (from o in yolo.Table1s where o.Id == num select o).ToList();
-            foreach ( var i in listuri.ToList())
-            {
-                if (i.Id == num) {
-
-                    listuri.Remove(i);
-                }
-                if (i.Title == nim)
-                {
-                    listuri.Remove(i);
-                }
-            }
+           
+            
             foreach( var o in jolo)
             {
                 yolo.Remove(o);
@@ -283,7 +300,7 @@ namespace Oppikirja
                                 StartLearningDate = Convert.ToDateTime(on.StartLearningDate),
                                 InProgress = Convert.ToBoolean(on.InProgress),
                                 CompletionDate = Convert.ToDateTime(on.CompletionDate)
-                            });// LUO TÄSTÄ METODI 
+                            });// LUO TÄSTÄ METODI 21.6.  // EN LUO LUO ITE 22.6
                         };
                         break;
                 }

@@ -9,6 +9,7 @@ using System.Text;
 using CsvHelper.Configuration;
 using System.Data;
 using Oppikirja.Models;
+using System.Threading;
 
 namespace Oppikirja
 {
@@ -25,11 +26,24 @@ namespace Oppikirja
             Method.OldDirtyBastard( topi,  listuri);
             Console.ForegroundColor
             = ConsoleColor.Blue;
-            Console.WriteLine("---------------------------");
-            Console.WriteLine("\tTERVETULOA");
-            Console.WriteLine("---------------------------");
+            for (int i = 0; i < 28; i++)
+            {
+                Console.Write("-");
+                Thread.Sleep(55);
+            }
             Console.ForegroundColor
-            = ConsoleColor.White;
+            = ConsoleColor.DarkYellow;
+            Console.WriteLine("\n\tTERVETULOA");
+            Console.ForegroundColor
+            = ConsoleColor.Blue;
+            for (int i = 0; i < 28; i++)
+            {
+                Console.Write("-");
+                Thread.Sleep(55);
+            }
+            Console.ForegroundColor
+                = ConsoleColor.White;
+            Console.Write("\n");
             var context = new DiaryContext();
             var t = (from s in context.Table1s select s).ToList();
             foreach( var on in t )
@@ -97,9 +111,23 @@ namespace Oppikirja
 
                     case 6:
                         Console.Clear();
-                        Console.WriteLine("---------------------------");
-                        Console.WriteLine("\tTervemenoa!");
-                        Console.WriteLine("---------------------------");
+                        Console.ForegroundColor
+                        = ConsoleColor.Magenta;
+                        for (int i = 0; i < 28; i++)
+                        {
+                            Console.Write("-");
+                            Thread.Sleep(55);
+                        }
+                        Console.ForegroundColor
+                        = ConsoleColor.DarkYellow;
+                        Console.WriteLine("\n\tTERVEMENOA");
+                        Console.ForegroundColor
+                        = ConsoleColor.Magenta;
+                        for (int i = 0; i < 28; i++)
+                        {
+                            Console.Write("-");
+                            Thread.Sleep(55);
+                        }
                         Console.WriteLine("\n\n\n\n\nSovellus on myynnissä lähtöhinta: 1 euro enemmän kuin Wolt");
                         break;
 
