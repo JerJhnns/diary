@@ -10,24 +10,14 @@ namespace Oppikirja
     {
         
         public int Id { get; set; }
-       
         public string Title { get; set; }
-     
         public string Description { get; set; }
-    
         public double EstimatedTimeToMaster { get; set; }
- 
         public double TimeSpent { get; set; }
-    
         public string Source { get; set; }
-       
         public DateTime StartLearningDate { get; set; }
-     
         public bool InProgress { get; set; }
-     
         public DateTime CompletionDate { get; set; }
-
-
 
         public string Tulostus()
         {
@@ -38,6 +28,10 @@ namespace Oppikirja
         {
             return $"ID: {Id}\nAihe: {Title}\nKuvaus {Description}\nSinulla on : {EstimatedTimeToMaster - TimeSpent}h jäljellä\n" +
                 $"Lähde: {Source}\nSait opiskelusi valmiiksi {(CompletionDate - StartLearningDate).TotalDays} päivässä";
+        }
+        public string Tuli()
+        {
+            return $"ID: {Id}\nAihe:";
         }
     }
 }
