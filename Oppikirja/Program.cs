@@ -21,13 +21,10 @@ namespace Oppikirja
             
             List<Topic> listuri = new List<Topic>();
             Topic topi = new Topic();
-            
             int valinta ;
-            
             Method.Raekwon();
             var context = new DiaryContext();
             Method.OldDirtyBastard(listuri, context);
-           
            
             
             do

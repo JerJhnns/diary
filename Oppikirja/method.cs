@@ -13,6 +13,7 @@ using System.Data;
 using Oppikirja;
 using ClassLibrary1;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Oppikirja
 {
@@ -31,7 +32,7 @@ namespace Oppikirja
                 {
                     Console.WriteLine("Aiheen otsikko");
                     topi.Title = Console.ReadLine();
-
+                  
                 }
                 catch (Exception e) { Console.WriteLine(e.Message); continue; }
                 break;
@@ -319,7 +320,7 @@ namespace Oppikirja
                 }
             }
         }
-        public static void Ghostfacekillah(Topic topi, List<Topic> listuri)
+        public static async Task Ghostfacekillah(Topic topi, List<Topic> listuri)
         {
             Console.WriteLine("Anna ID?");
             
