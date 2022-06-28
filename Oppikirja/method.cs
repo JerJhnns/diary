@@ -11,17 +11,18 @@ using Oppikirja.Models;
 using Microsoft.Data.SqlClient;
 using System.Data;
 using Oppikirja;
+using ClassLibrary1;
 
 namespace Oppikirja
 {
-
+   
     public class Method
 
     {
 
         public static void Methodman(Topic topi, List<Topic> listuri)
         {
-
+            Class1 kirjasto =  new Class1();
 
             while (true)
             {
@@ -86,8 +87,7 @@ namespace Oppikirja
                 try
                 {
                     topi.InProgress = false;
-                    Console.WriteLine("Milloin sait valmiiksi? dd/MM/yyyy");
-                    topi.CompletionDate = Convert.ToDateTime(Console.ReadLine());
+                    
                 }
                 catch (Exception e) { Console.WriteLine(e.Message); }
 
@@ -97,13 +97,26 @@ namespace Oppikirja
 
                 try
                 {
-                    topi.InProgress = true; topi.CompletionDate = DateTime.Today;
+                    topi.InProgress = true;
                 }
                 catch (Exception e) { Console.WriteLine(e.Message); }
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine("Anna valmistumispäivä: dd/MM/yyyy ");
+                    topi.CompletionDate = Convert.ToDateTime(Console.ReadLine());
+                }
+                catch (Exception e) { Console.WriteLine(e.Message); continue; }
+                break;
+            }
+            kirjasto.A = topi.CompletionDate;
+            kirjasto.B = topi.StartLearningDate;
+            kirjasto.C = topi.InProgress;
 
-
-
-
+            kirjasto.Tarkistus();
+            kirjasto.Myohassa();
+            Console.Read();
             listuri.Add(new Topic
             {
                 Id = topi.Id,
@@ -256,7 +269,6 @@ namespace Oppikirja
                         foreach (var o in jolo)
                         {
                             o.StartLearningDate = Convert.ToDateTime(alote);
-
                         }
                         yolo.SaveChanges();
                         break;
@@ -304,7 +316,6 @@ namespace Oppikirja
                         };
                         break;
                 }
-               
             }
         }
         public static void Ghostfacekillah(Topic topi, List<Topic> listuri)

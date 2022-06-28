@@ -29,10 +29,7 @@ namespace Oppikirja
             return $"ID: {Id}\nAihe: {Title}\nKuvaus {Description}\nSinulla on : {EstimatedTimeToMaster - TimeSpent}h jäljellä\n" +
                 $"Lähde: {Source}\nSait opiskelusi valmiiksi {(CompletionDate - StartLearningDate).TotalDays} päivässä";
         }
-        public string Tuli()
-        {
-            return $"ID: {Id}\nAihe:";
-        }
+        
     }
 }
     

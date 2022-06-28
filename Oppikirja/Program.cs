@@ -61,9 +61,8 @@ namespace Oppikirja
                     CompletionDate = Convert.ToDateTime(on.CompletionDate)
                 });
             };
+           
             
-
-
             do
             {
 
