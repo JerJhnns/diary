@@ -24,7 +24,7 @@ namespace Oppikirja
             int valinta ;
             Method.Raekwon();
             var context = new DiaryContext();
-            Method.OldDirtyBastard(listuri, context);
+            //Method.OldDirtyBastard(listuri, context);
            
             
             do

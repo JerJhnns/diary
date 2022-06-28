@@ -322,6 +322,7 @@ namespace Oppikirja
         }
         public static async Task Ghostfacekillah(Topic topi, List<Topic> listuri)
         {
+           
             Console.WriteLine("Anna ID?");
             
             int num = Convert.ToInt32(Console.ReadLine());
@@ -329,8 +330,6 @@ namespace Oppikirja
             DiaryContext yolo = new DiaryContext();
             var jolo = (from o in yolo.Table1s where o.Id == num select o).ToList();
             Console.Clear();
-            if (listuri.Select(a => a.Id == num).Any())
-            {
 
                 Console.WriteLine("Mitä haluat muokata");
                 Console.WriteLine("1.Poista tieto\n\n" +
@@ -446,8 +445,7 @@ namespace Oppikirja
                         break;
                 }
                 
-            }
-            else { }
+            
         }
         public static void Raekwon()
         {
@@ -482,22 +480,7 @@ namespace Oppikirja
         {
 
 
-            var t = (from s in context.Table1s select s).ToList();
-            foreach (var on in t)
-            {
-                listuri.Add(new Topic
-                {
-                    Id = on.Id,
-                    Title = on.Title,
-                    Description = on.Description,
-                    EstimatedTimeToMaster = Convert.ToDouble(on.TimeToMaster),
-                    TimeSpent = Convert.ToDouble(on.TimeSpent),
-                    Source = on.Source,
-                    StartLearningDate = Convert.ToDateTime(on.StartLearningDate),
-                    InProgress = Convert.ToBoolean(on.InProgress),
-                    CompletionDate = Convert.ToDateTime(on.CompletionDate)
-                });
-            };
+           
 
 
         }
