@@ -22,7 +22,7 @@ namespace Oppikirja
 
     {
 
-        public static void Methodman(Topic topi, List<Topic> listuri)
+        public static void Methodman(Topic topi)
         {
             Class1 kirjasto =  new Class1();
 
@@ -119,18 +119,7 @@ namespace Oppikirja
             kirjasto.Tarkistus();
             kirjasto.Myohassa();
             Console.Read();
-            listuri.Add(new Topic
-            {
-                Id = topi.Id,
-                Title = topi.Title,
-                Description = topi.Description,
-                EstimatedTimeToMaster = topi.EstimatedTimeToMaster,
-                TimeSpent = topi.TimeSpent,
-                Source = topi.Source,
-                StartLearningDate = topi.StartLearningDate,
-                InProgress = topi.InProgress,
-                CompletionDate = topi.CompletionDate
-            });
+           
 
 
 
@@ -155,7 +144,7 @@ namespace Oppikirja
 
         }
        
-        public static void Gza(Topic topi, List<Topic> listuri, int num, string nim)
+        public static void Gza(Topic topi, int num, string nim)
         {
             Console.Clear();
             DiaryContext yolo = new DiaryContext();
@@ -175,15 +164,14 @@ namespace Oppikirja
             yolo.SaveChanges();
         }
 
-        public static void Redman( Topic topi,  List<Topic> listuri, DiaryContext context)
+        public static void Redman( Topic topi, DiaryContext context)
         {
             Console.WriteLine("Anna Title");
             DiaryContext yolo = new DiaryContext();
             int num = 2;
             string nim = Console.ReadLine();
             Console.Clear();
-            if (listuri.Select(a => a.Title == nim).Any())
-            {
+           
 
                 Console.WriteLine("Vauuu löysit oikeean paikkaan.");
                 Console.WriteLine("1.Poista tieto\n" +
@@ -204,7 +192,7 @@ namespace Oppikirja
                     case 1:
                         Console.Clear();
                         Console.WriteLine("Poista osio");
-                        Gza(topi, listuri,num, nim);
+                        Gza(topi, num, nim);
                         break;
                     case 2:
                         Console.Clear();
@@ -215,8 +203,10 @@ namespace Oppikirja
                         foreach(var o in jolo)
                         {
                             o.Title = uusiTitle;
-                        }
+                        yolo.SaveChanges();
+                    }
                         break;
+                  
                     case 3:
                         Console.Clear();
                         Console.WriteLine("Anna uusi kommentti");
@@ -300,27 +290,12 @@ namespace Oppikirja
                                 Console.WriteLine(o.Jalostus());
                             }
                         }
-                        var t = (from s in context.Table1s select s).ToList();
-                        foreach (var on in t)
-                        {
-                            listuri.Add(new Topic
-                            {
-                               
-                                Title = on.Title,
-                                Description = on.Description,
-                                EstimatedTimeToMaster = Convert.ToDouble(on.TimeToMaster),
-                                TimeSpent = Convert.ToDouble(on.TimeSpent),
-                                Source = on.Source,
-                                StartLearningDate = Convert.ToDateTime(on.StartLearningDate),
-                                InProgress = Convert.ToBoolean(on.InProgress),
-                                CompletionDate = Convert.ToDateTime(on.CompletionDate)
-                            });// LUO TÄSTÄ METODI 21.6.  // EN LUO LUO ITE 22.6
-                        };
+                        
                         break;
-                }
+                
             }
         }
-        public static async Task Ghostfacekillah(Topic topi, List<Topic> listuri)
+        public static void Ghostfacekillah(Topic topi)
         {
            
             Console.WriteLine("Anna ID?");
@@ -349,7 +324,7 @@ namespace Oppikirja
                     case 1:
                         Console.Clear();
                         Console.WriteLine("Poista tiedosto");
-                        Gza(topi, listuri, num, nim);
+                        Gza(topi, num, nim);
                         break;
                     case 2:
                         Console.Clear();
@@ -476,11 +451,31 @@ namespace Oppikirja
 
 
         }
-        public static void OldDirtyBastard(List<Topic> listuri, DiaryContext context)
+        public static void OldDirtyBastard()
         {
 
+            Console.Clear();
+            Console.ForegroundColor
+            = ConsoleColor.Magenta;
+            for (int i = 0; i < 28; i++)
+            {
+                Console.Write("-");
+                Thread.Sleep(55);
+            }
+            Console.ForegroundColor
+            = ConsoleColor.DarkYellow;
+            Console.WriteLine("\n\tTERVEMENOA");
+            Console.ForegroundColor
+            = ConsoleColor.Magenta;
+            for (int i = 0; i < 28; i++)
+            {
+                Console.Write("-");
+                Thread.Sleep(55);
+            }
+            Console.WriteLine("\n\n\n\n\nSovellus on myynnissä lähtöhinta: 1 euro enemmän kuin Wolt");
+            
 
-           
+
 
 
         }

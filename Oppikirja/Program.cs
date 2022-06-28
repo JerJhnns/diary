@@ -44,19 +44,19 @@ namespace Oppikirja
                 {
                     case 1:
                         Console.Clear();
-                        Method.Methodman(topi, listuri );
+                        Method.Methodman(topi );
                         Console.Clear();
                         break;
                     case 2:
 
                         Console.Clear();
-                        Method.Redman( topi, listuri, context);
+                        Method.Redman( topi, context);
                         Console.Clear();
                         break;
 
                     case 3:
                         Console.Clear();
-                        Method.Ghostfacekillah(topi, listuri);
+                        Method.Ghostfacekillah(topi);
                         Console.Clear();
                         break;
 
@@ -73,25 +73,7 @@ namespace Oppikirja
                         break;
 
                     case 6:
-                        Console.Clear();
-                        Console.ForegroundColor
-                        = ConsoleColor.Magenta;
-                        for (int i = 0; i < 28; i++)
-                        {
-                            Console.Write("-");
-                            Thread.Sleep(55);
-                        }
-                        Console.ForegroundColor
-                        = ConsoleColor.DarkYellow;
-                        Console.WriteLine("\n\tTERVEMENOA");
-                        Console.ForegroundColor
-                        = ConsoleColor.Magenta;
-                        for (int i = 0; i < 28; i++)
-                        {
-                            Console.Write("-");
-                            Thread.Sleep(55);
-                        }
-                        Console.WriteLine("\n\n\n\n\nSovellus on myynnissä lähtöhinta: 1 euro enemmän kuin Wolt");
+                        Method.OldDirtyBastard();
                         break;
 
                     default:
