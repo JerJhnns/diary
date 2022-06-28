@@ -12,6 +12,7 @@ using Microsoft.Data.SqlClient;
 using System.Data;
 using Oppikirja;
 using ClassLibrary1;
+using System.Threading;
 
 namespace Oppikirja
 {
@@ -447,34 +448,58 @@ namespace Oppikirja
             }
             else { }
         }
-        public static void Raekwon(List<Topic> listuri, Topic topi )
+        public static void Raekwon()
         {
-            
 
 
+            Console.ForegroundColor
+           = ConsoleColor.Blue;
+            for (int i = 0; i < 28; i++)
+            {
+                Console.Write("-");
+                Thread.Sleep(55);
+            }
+            Console.ForegroundColor
+            = ConsoleColor.DarkYellow;
+            Console.WriteLine("\n\tTERVETULOA");
+            Console.ForegroundColor
+            = ConsoleColor.Blue;
+            for (int i = 0; i < 28; i++)
+            {
+                Console.Write("-");
+                Thread.Sleep(55);
+            }
+            Console.ForegroundColor
+                = ConsoleColor.White;
+            Console.Write("\n");
 
 
 
 
         }
-        public static void OldDirtyBastard( Topic topi, List<Topic> listuri)
+        public static void OldDirtyBastard(List<Topic> listuri, DiaryContext context)
         {
-           
-                
-                listuri.Add(new Topic {
-                   
-                    Title = topi.Title,
-                    Description = topi.Description,
-                    EstimatedTimeToMaster = topi.EstimatedTimeToMaster,
-                    TimeSpent = topi.TimeSpent,
-                    Source = topi.Source,
-                    StartLearningDate = topi.StartLearningDate,
-                    InProgress = topi.InProgress,
-                    CompletionDate = topi.CompletionDate
+
+
+            var t = (from s in context.Table1s select s).ToList();
+            foreach (var on in t)
+            {
+                listuri.Add(new Topic
+                {
+                    Id = on.Id,
+                    Title = on.Title,
+                    Description = on.Description,
+                    EstimatedTimeToMaster = Convert.ToDouble(on.TimeToMaster),
+                    TimeSpent = Convert.ToDouble(on.TimeSpent),
+                    Source = on.Source,
+                    StartLearningDate = Convert.ToDateTime(on.StartLearningDate),
+                    InProgress = Convert.ToBoolean(on.InProgress),
+                    CompletionDate = Convert.ToDateTime(on.CompletionDate)
                 });
-               
-            
-          }
+            };
+
+
+        }
         public static void Rza()
         {
             DiaryContext kalle = new DiaryContext();

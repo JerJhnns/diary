@@ -23,44 +23,11 @@ namespace Oppikirja
             Topic topi = new Topic();
             
             int valinta ;
-            Method.OldDirtyBastard( topi,  listuri);
-            Console.ForegroundColor
-            = ConsoleColor.Blue;
-            for (int i = 0; i < 28; i++)
-            {
-                Console.Write("-");
-                Thread.Sleep(55);
-            }
-            Console.ForegroundColor
-            = ConsoleColor.DarkYellow;
-            Console.WriteLine("\n\tTERVETULOA");
-            Console.ForegroundColor
-            = ConsoleColor.Blue;
-            for (int i = 0; i < 28; i++)
-            {
-                Console.Write("-");
-                Thread.Sleep(55);
-            }
-            Console.ForegroundColor
-                = ConsoleColor.White;
-            Console.Write("\n");
+            
+            Method.Raekwon();
             var context = new DiaryContext();
-            var t = (from s in context.Table1s select s).ToList();
-            foreach( var on in t )
-            {
-                listuri.Add(new Topic
-                {
-                    Id = on.Id,
-                    Title = on.Title,
-                    Description = on.Description,
-                    EstimatedTimeToMaster = Convert.ToDouble(on.TimeToMaster),
-                    TimeSpent = Convert.ToDouble(on.TimeSpent),
-                    Source = on.Source,
-                    StartLearningDate = Convert.ToDateTime(on.StartLearningDate),
-                    InProgress = Convert.ToBoolean(on.InProgress),
-                    CompletionDate = Convert.ToDateTime(on.CompletionDate)
-                });
-            };
+            Method.OldDirtyBastard(listuri, context);
+           
            
             
             do
