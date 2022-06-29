@@ -17,9 +17,9 @@ using System.Threading.Tasks;
 
 namespace Oppikirja
 {
-   
-    public class Method
 
+    public class Method
+    
     {
 
         public static void Methodman(Topic topi)
@@ -79,29 +79,20 @@ namespace Oppikirja
                 catch (Exception e) { Console.WriteLine(e.Message); continue; }
                 break;
             }
-            Console.WriteLine("Onko opiskelu kesken? Y/N");
-            var valinta = Console.ReadLine();
-
-
-            if (valinta == "N")
+            while (true)
             {
-
-                try
-                {
-                    topi.InProgress = false;
-                    
-                }
-                catch (Exception e) { Console.WriteLine(e.Message); }
+                Console.WriteLine("Onko opiskelu kesken? Y/N");
+                var valinta = Console.ReadLine();
 
 
+                if (valinta == "N") { topi.InProgress = false; }
+                if (valinta == "Y") { topi.InProgress = true; }
+                else { continue; }
+                break;
             }
-            if (valinta == "Y")
+           
 
-                try
-                {
-                    topi.InProgress = true;
-                }
-                catch (Exception e) { Console.WriteLine(e.Message); }
+
             while (true)
             {
                 try
@@ -116,12 +107,9 @@ namespace Oppikirja
             kirjasto.B = topi.StartLearningDate;
             kirjasto.C = topi.InProgress;
 
-            kirjasto.Tarkistus();
+            /*kirjasto.Tarkistus();
             kirjasto.Myohassa();
-            Console.Read();
-           
-
-
+            Console.Read();*/
 
             using (DiaryContext kokeilu = new DiaryContext())
             {
