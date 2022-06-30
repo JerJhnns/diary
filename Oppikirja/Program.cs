@@ -31,12 +31,10 @@ namespace Oppikirja
             {
 
                 Console.WriteLine(
-                    "Vaihtoehtosi \nValitse 1: Jos haluat lisätä opinnon. " +
-                    "\nValitse 2: Jos haluat tarkastaa, muokata tai poistaa Titlellä \n" +
-                    "Valitse 3: Jos haluat tarkastaa, muokata tai poistaa Id:llä" +
-                    "\nValitse 4: Jos haluat tyhjentää tiedot txt kansiosta " +
-                    "\nValitse 5: Checkata aiheesi" +
-                    "\nValitse 6: jos haluat lopettaa.");
+                    "\n\n\t\t\tVaihtoehtosi \n\n\n\n\tValitse 1: Jos haluat lisätä opinnon. " +
+                    "\n\n\tValitse 2: Jos haluat tarkastaa, muokata tai poistaa Id:llä tai Titlellä" +
+                    "\n\n\tValitse 3: Checkata aiheesi" +
+                    "\n\n\tValitse 4: jos haluat lopettaa.");
                 
                 valinta = Convert.ToInt32(Console.ReadLine());
 
@@ -54,25 +52,14 @@ namespace Oppikirja
                         Console.Clear();
                         break;
 
+                
                     case 3:
-                        Console.Clear();
-                        Method.Ghostfacekillah(topi);
-                        Console.Clear();
-                        break;
-
-                    case 4:
-                        Console.Clear();
-                        
-                        Console.Clear();
-                        break;
-                        
-                    case 5:
                         Console.Clear();
                         Method.Rza();
                         Console.Clear();
                         break;
 
-                    case 6:
+                    case 4:
                         Method.OldDirtyBastard();
                         break;
 
