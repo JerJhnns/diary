@@ -136,39 +136,53 @@ namespace Oppikirja
         {
             Console.Clear();
             DiaryContext yolo = new DiaryContext();
-
-            var jolo = (from o in yolo.Table1s where o.Title == nim select o).ToList();
-            var jojo = (from o in yolo.Table1s where o.Id == num select o).ToList();
-           
-            
-            foreach( var o in jolo)
+            try
             {
-                yolo.Remove(o);
+                var jolo = (from o in yolo.Table1s where o.Title == nim select o).ToList();
+                var jojo = (from o in yolo.Table1s where o.Id == num select o).ToList();
 
+
+                foreach (var o in jolo)
+                {
+                    yolo.Remove(o);
+
+                }
+                foreach (var o in jojo)
+                {
+                    yolo.Remove(o);
+                }
+                yolo.SaveChanges();
             }
-            foreach (var o in jojo)
-            {
-                yolo.Remove(o);
-            }
-            yolo.SaveChanges();
+            catch (Exception) { Console.WriteLine("Valitsemaasi IDtä tai Topiccia ei löydt"); }
         }
 
         public static void Redman( Topic topi, DiaryContext context)
+
         {
-            Console.WriteLine("Anna Id tai Title");
-            DiaryContext yolo = new DiaryContext();
             
-            string nim = Console.ReadLine();
-            int num;
-            if (int.TryParse(nim, out num)) { }
-            
-            var jolo = (from o in yolo.Table1s where o.Title == nim ||  o.Id == num select o).ToList();
-            Console.Clear();
-           
+            while (true)
+            {
+               
+                Console.WriteLine("Anna Id tai Title");
+                DiaryContext yolo = new DiaryContext();
+
+                string nim = Console.ReadLine();
+                int num;
+                if (int.TryParse(nim, out num)) { }
+
+                var jolo = (from o in yolo.Table1s where o.Title == nim || o.Id == num select o).ToList();
+                if (jolo.Count == 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine("VITTU VALISTE OLEMASSA OLEVA ASIA");
+                    
+                    continue;
+                }
+                Console.Clear();
 
                 Console.WriteLine("Vauuu löysit oikeean paikkaan.");
                 Console.WriteLine("1.Poista tieto\n" +
-                    "Muokkaa tietoja\n\n"+
+                    "Muokkaa tietoja\n\n" +
                     "2. Otsikko\n" +
                     "3. Kommentti\n" +
                     "4. Opiskeluun tarvittava aika\n" +
@@ -180,9 +194,9 @@ namespace Oppikirja
                     "10. Tarkasta tiedot");
                 int valinta = Convert.ToInt32(Console.ReadLine());
                 Console.Clear();
-                
-               
-            switch (valinta)
+
+
+                switch (valinta)
                 {
                     case 1:
                         Console.Clear();
@@ -191,161 +205,165 @@ namespace Oppikirja
                         break;
                     case 2:
                         Console.Clear();
-                    while (true)
+                        while (true)
                         {
-                        try
-                        {
-                            Console.WriteLine("Anna uusi otsikko");
-                            string uusiTitle = Console.ReadLine();
-                            foreach (var o in jolo)
+                            try
                             {
-                                o.Title = uusiTitle;
-                                yolo.SaveChanges();
+                                Console.WriteLine("Anna uusi otsikko");
+                                string uusiTitle = Console.ReadLine();
+                                foreach (var o in jolo)
+                                {
+                                    o.Title = uusiTitle;
+                                    yolo.SaveChanges();
+                                }
                             }
+                            catch (Exception e) { Console.WriteLine(e.Message); continue; }
+                            break;
                         }
-                        catch (Exception e) { Console.WriteLine(e.Message); continue; }
                         break;
-                        }
-                        break;
-                case 3:
+                    case 3:
                         Console.Clear();
                         Console.WriteLine("Anna uusi kommentti");
                         string uusiDes = Console.ReadLine();
-                       
+
                         foreach (var o in jolo)
                         {
                             o.Description = uusiDes;
                         }
 
                         yolo.SaveChanges();
-                    break;
+                        break;
                     case 4:
                         Console.Clear();
-                    while (true)
-                    {
-
-                        try
+                        while (true)
                         {
 
-                            Console.WriteLine("Anna uusi aika-arvio");
-                            double aika = Convert.ToDouble(Console.ReadLine());
-
-                            foreach (var o in jolo)
+                            try
                             {
-                                o.TimeToMaster = Convert.ToInt32(aika);
-                            }
 
-                            yolo.SaveChanges();
+                                Console.WriteLine("Anna uusi aika-arvio");
+                                double aika = Convert.ToDouble(Console.ReadLine());
+
+                                foreach (var o in jolo)
+                                {
+                                    o.TimeToMaster = Convert.ToInt32(aika);
+                                }
+
+                                yolo.SaveChanges();
+                            }
+                            catch (Exception e) { Console.WriteLine(e.Message); continue; }
+                            break;
                         }
-                        catch (Exception e) { Console.WriteLine(e.Message); continue; }
-                        break;
-                    }
                         break;
                     case 5:
                         Console.Clear();
-                    while (true)
-                    {
-                        try
+                        while (true)
                         {
+                            try
+                            {
 
+                            }
+                            catch (Exception e) { Console.WriteLine(e.Message); continue; }
+                            break;
                         }
-                        catch(Exception e) { Console.WriteLine(e.Message);  continue; }
-                        break;
-                    }
                         Console.WriteLine("Anna uusi tuhlatun aja arvio");
                         double tuhaika = Convert.ToDouble(Console.ReadLine());
-                        
+
                         foreach (var o in jolo)
                         {
                             o.TimeSpent = Convert.ToInt32(tuhaika);
 
                         }
-                  
-                    yolo.SaveChanges();
+
+                        yolo.SaveChanges();
                         break;
                     case 6:
                         Console.Clear();
-                    while (true)
-                    {
-                        try
+                        while (true)
                         {
-                            Console.WriteLine("Anna uusi lähde");
-                            string lähde = Console.ReadLine();
-
-                            foreach (var o in jolo)
+                            try
                             {
-                                o.Source = lähde;
+                                Console.WriteLine("Anna uusi lähde");
+                                string lähde = Console.ReadLine();
+
+                                foreach (var o in jolo)
+                                {
+                                    o.Source = lähde;
+
+                                }
+
+                                yolo.SaveChanges();
 
                             }
-
-                            yolo.SaveChanges();
-
+                            catch (Exception e) { Console.WriteLine(e.Message); continue; }
+                            break;
                         }
-                        catch (Exception e) { Console.WriteLine(e.Message);  continue; }
-                        break;
-                    }
-                   
+
                         break;
                     case 7:
                         Console.Clear();
-                    while (true)
-                    {
-                        try
+                        while (true)
                         {
-                            Console.WriteLine("Anna uusi aloituspäivä");
-                            DateTime alote = Convert.ToDateTime(Console.ReadLine());
-
-                            foreach (var o in jolo)
+                            try
                             {
-                                o.StartLearningDate = Convert.ToDateTime(alote);
+                                Console.WriteLine("Anna uusi aloituspäivä");
+                                DateTime alote = Convert.ToDateTime(Console.ReadLine());
+
+                                foreach (var o in jolo)
+                                {
+                                    o.StartLearningDate = Convert.ToDateTime(alote);
+                                }
+
+                                yolo.SaveChanges();
+
                             }
-
-                            yolo.SaveChanges();
-
+                            catch (Exception e) { Console.WriteLine(e.Message); continue; }
+                            break;
                         }
-                        catch (Exception e) { Console.WriteLine(e.Message); continue; }
-                        break;
-                    }
-                   
+
                         break;
                     case 8:
                         Console.Clear();
-                    while (true)
-                    {
-                        try
+                        while (true)
                         {
-                            Console.WriteLine("Anna uusi valmistumipäivä");
-                            DateTime lopete = Convert.ToDateTime(Console.ReadLine());
+                            try
+                            {
+                                Console.WriteLine("Anna uusi valmistumipäivä");
+                                DateTime lopete = Convert.ToDateTime(Console.ReadLine());
+
+                                foreach (var o in jolo)
+                                {
+                                    o.CompletionDate = Convert.ToDateTime(lopete);
+                                    o.InProgress = false;
+                                }
+
+                                yolo.SaveChanges();
+                            }
+                            catch (Exception e) { Console.WriteLine(e.Message); continue; }
+                            break;
+                        }
+                        break;
+                    case 9:
+                        Console.Clear();
+
+                        while (true)
+                        {
+
+                            Console.WriteLine("Onko opiskelu kesken? Y/N");
+                            var uusiValinta = Console.ReadLine();
 
                             foreach (var o in jolo)
                             {
-                                o.CompletionDate = Convert.ToDateTime(lopete);
-                                o.InProgress = false;
+                                if (uusiValinta == "N") { o.InProgress = false; }
+                                if (uusiValinta == "Y") { o.InProgress = true; }
                             }
-
-                            yolo.SaveChanges();
+                            break;
                         }
-                        catch (Exception e) { Console.WriteLine(e.Message);  continue; }
                         break;
-                    }
-                    break;
-                     case 9:
-                    Console.Clear();
-                    while (true)
-                    {
-                        Console.WriteLine("Onko opiskelu kesken? Y/N");
-                        var uusiValinta = Console.ReadLine();
 
-
-                        if (uusiValinta == "N") { topi.InProgress = false; }
-                        if (uusiValinta == "Y") { topi.InProgress = true; }
-                        else { continue; }
-                        break;
-                    }
-                    break;
                     case 10:
                         Console.Clear();
-                        
+
                         foreach (var o in jolo)
                         {
                             if (o.InProgress == true)
@@ -356,14 +374,18 @@ namespace Oppikirja
                             {
                                 Console.WriteLine(o.Jalostus());
                             }
-                        
-                         
-                         }
-                    Console.ReadKey();
-                    break;
-                
+
+
+                        }
+                        Console.ReadKey();
+                        break;
+                }
+
             }
+
+            
         }
+        
         public static void Ghostfacekillah(Topic topi)
         {
            
@@ -436,14 +458,20 @@ namespace Oppikirja
         public static void Rza()
         {
             DiaryContext kalle = new DiaryContext();
-            var jolo = (from o in kalle.Table1s  select o).ToList();
-            foreach (var i in jolo)
+            try
             {
-
-                Console.WriteLine("ID: "+i.Id + " " + i.Title);
                
+                var jolo = (from o in kalle.Table1s select o).ToList();
+                foreach (var i in jolo)
+                {
+
+                    Console.WriteLine("ID: " + i.Id + " " + i.Title);
+
+                }
+                Console.ReadLine();
+             
             }
-            Console.ReadLine();
+            catch (Exception) { Console.WriteLine("Valitsemaasi IDtä tai Titleä ei löydy"); }
             return;
         }
 
