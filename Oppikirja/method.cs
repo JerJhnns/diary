@@ -170,8 +170,8 @@ namespace Oppikirja
                 int num;
                 if (int.TryParse(nim, out num)) { }
 
-                var jolo = (from o in yolo.Table1s where o.Title == nim || o.Id == num select o).ToList();
-                if (jolo.Count == 0)
+                var jolo = (from o in yolo.Table1s where o.Title == nim || o.Id == num select o).FirstOrDefault();
+                if (jolo == null)
                 {
                     Console.Clear();
                     Console.WriteLine("VITTU VALISTE OLEMASSA OLEVA ASIA");
@@ -211,11 +211,9 @@ namespace Oppikirja
                             {
                                 Console.WriteLine("Anna uusi otsikko");
                                 string uusiTitle = Console.ReadLine();
-                                foreach (var o in jolo)
-                                {
-                                    o.Title = uusiTitle;
-                                    yolo.SaveChanges();
-                                }
+                                jolo.Title = uusiTitle;
+                                yolo.SaveChanges();
+                                
                             }
                             catch (Exception e) { Console.WriteLine(e.Message); continue; }
                             break;
@@ -225,12 +223,8 @@ namespace Oppikirja
                         Console.Clear();
                         Console.WriteLine("Anna uusi kommentti");
                         string uusiDes = Console.ReadLine();
-
-                        foreach (var o in jolo)
-                        {
-                            o.Description = uusiDes;
-                        }
-
+                        jolo.Description = uusiDes;
+                        
                         yolo.SaveChanges();
                         break;
                     case 4:
@@ -243,12 +237,7 @@ namespace Oppikirja
 
                                 Console.WriteLine("Anna uusi aika-arvio");
                                 double aika = Convert.ToDouble(Console.ReadLine());
-
-                                foreach (var o in jolo)
-                                {
-                                    o.TimeToMaster = Convert.ToInt32(aika);
-                                }
-
+                                jolo.TimeSpent = Convert.ToInt32(aika);
                                 yolo.SaveChanges();
                             }
                             catch (Exception e) { Console.WriteLine(e.Message); continue; }
@@ -269,11 +258,7 @@ namespace Oppikirja
                         Console.WriteLine("Anna uusi tuhlatun aja arvio");
                         double tuhaika = Convert.ToDouble(Console.ReadLine());
 
-                        foreach (var o in jolo)
-                        {
-                            o.TimeSpent = Convert.ToInt32(tuhaika);
-
-                        }
+                            jolo.TimeSpent = Convert.ToInt32(tuhaika);
 
                         yolo.SaveChanges();
                         break;
@@ -286,11 +271,7 @@ namespace Oppikirja
                                 Console.WriteLine("Anna uusi lähde");
                                 string lähde = Console.ReadLine();
 
-                                foreach (var o in jolo)
-                                {
-                                    o.Source = lähde;
-
-                                }
+                                    jolo.Source = lähde;
 
                                 yolo.SaveChanges();
 
@@ -308,12 +289,8 @@ namespace Oppikirja
                             {
                                 Console.WriteLine("Anna uusi aloituspäivä");
                                 DateTime alote = Convert.ToDateTime(Console.ReadLine());
-
-                                foreach (var o in jolo)
-                                {
-                                    o.StartLearningDate = Convert.ToDateTime(alote);
-                                }
-
+                           
+                                    jolo.StartLearningDate = Convert.ToDateTime(alote);
                                 yolo.SaveChanges();
 
                             }
@@ -331,11 +308,7 @@ namespace Oppikirja
                                 Console.WriteLine("Anna uusi valmistumipäivä");
                                 DateTime lopete = Convert.ToDateTime(Console.ReadLine());
 
-                                foreach (var o in jolo)
-                                {
-                                    o.CompletionDate = Convert.ToDateTime(lopete);
-                                    o.InProgress = false;
-                                }
+                                    jolo.CompletionDate = Convert.ToDateTime(lopete);
 
                                 yolo.SaveChanges();
                             }
@@ -352,11 +325,10 @@ namespace Oppikirja
                             Console.WriteLine("Onko opiskelu kesken? Y/N");
                             var uusiValinta = Console.ReadLine();
 
-                            foreach (var o in jolo)
-                            {
-                                if (uusiValinta == "N") { o.InProgress = false; }
-                                if (uusiValinta == "Y") { o.InProgress = true; }
-                            }
+                          
+                                if (uusiValinta == "N") { jolo.InProgress = false; }
+                                if (uusiValinta == "Y") { jolo.InProgress = true; }
+                            
                             break;
                         }
                         break;
@@ -364,23 +336,22 @@ namespace Oppikirja
                     case 10:
                         Console.Clear();
 
-                        foreach (var o in jolo)
-                        {
-                            if (o.InProgress == true)
+                      
+                            if (jolo.InProgress == true)
                             {
-                                Console.WriteLine(o.Tulostus());
+                                Console.WriteLine(jolo.Tulostus());
                             }
                             else
                             {
-                                Console.WriteLine(o.Jalostus());
+                                Console.WriteLine(jolo.Jalostus());
                             }
 
 
-                        }
+                        
                         Console.ReadKey();
                         break;
                 }
-
+                break;
             }
 
             
